@@ -4,6 +4,7 @@ func _ready() -> void:
 	$player.died.connect(_on_player_died)
 	$player.set_physics_process(false)
 	$UILayer/RestartButton.hide()
+	consume_fuel(90)
 
 func _process(delta: float) -> void:
 	pass

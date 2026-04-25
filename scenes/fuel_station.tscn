@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://btgrlfhm1alrv"]
+
+[ext_resource type="Script" uid="uid://85wojgbp3s2n" path="res://fuel_station.gd" id="1_84q31"]
+
+[node name="FuelStation" type="Node2D" unique_id=290283225]
+script = ExtResource("1_84q31")
