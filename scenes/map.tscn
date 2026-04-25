@@ -27,6 +27,7 @@ offset_bottom = 29.0
 grow_horizontal = 0
 theme_override_styles/fill = SubResource("StyleBoxFlat_fuel")
 value = 100.0
+show_percentage = false
 script = ExtResource("2_paxxb")
 
 [node name="HealthBar" type="ProgressBar" parent="CanvasLayer" unique_id=521807029]
@@ -51,4 +52,11 @@ offset_top = -20.0
 offset_right = 120.0
 script = ExtResource("5_alt")
 
+[node name="FuelDrainTimer" type="Timer" parent="." unique_id=521807032]
+wait_time = 6.0
+autostart = true
+
 [node name="player" parent="." unique_id=1130869114 instance=ExtResource("1_4xfga")]
+up_direction = Vector2(0, 1)
+
+[connection signal="timeout" from="FuelDrainTimer" to="." method="_on_fuel_drain_timer_timeout"]

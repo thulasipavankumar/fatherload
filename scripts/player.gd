@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var maxFuel = 100
 var currentFuel: int = maxFuel
 signal fuel_changed(new_fuel)
+@onready var sfx_move: AudioStreamPlayer = $sfx_move
 
 
 @export var max_health := 100
@@ -17,6 +18,9 @@ const SPEED = 100.0
 var last_direction: Vector2 = Vector2.RIGHT
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
+
+func increase_fuel_capacity(capacity:int):
+	maxFuel = capacity
 
 
 func _physics_process(delta: float) -> void:
@@ -51,9 +55,12 @@ func process_movement() -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_vector("left","right","up","down")
 	if direction!=Vector2.ZERO:
+		if !sfx_move.playing:
+			sfx_move.play()
 		velocity = direction * SPEED
 		last_direction = direction
 	else:
+		sfx_move.stop()
 		velocity = Vector2.ZERO
 		
 func play_animation(prefix:String,dir:Vector2) -> void:

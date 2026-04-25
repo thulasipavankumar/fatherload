@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ntmii3t76vmm" path="res://assets/images/player/Pod Movement.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://dewewpisepmp3" path="res://scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bolkcd7ghbr47" path="res://assets/Pod Movement.png" id="2_i3pqv"]
+[ext_resource type="AudioStream" uid="uid://b1ipxs4rbv11y" path="res://assets/audio/miner-move.mp3" id="4_dqkch"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7hik5"]
 atlas = ExtResource("2_i3pqv")
@@ -254,3 +255,7 @@ frame_progress = 0.1880214
 visible = false
 position = Vector2(11, 7)
 shape = SubResource("CircleShape2D_onrkg")
+
+[node name="sfx_move" type="AudioStreamPlayer" parent="." unique_id=1603709924]
+stream = ExtResource("4_dqkch")
+volume_db = -1.954
