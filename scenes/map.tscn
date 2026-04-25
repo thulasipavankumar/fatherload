@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://fiye1imymukk" path="res://scripts/main.gd" id="1_gldc4"]
 [ext_resource type="Script" uid="uid://cl5ywqfpts4fe" path="res://scripts/fuel_bar.gd" id="2_paxxb"]
 [ext_resource type="Script" uid="uid://2pqt4ro7l4x" path="res://scripts/health_bar.gd" id="3_hbar"]
-[ext_resource type="Script" path="res://scripts/cash_label.gd" id="4_cash"]
-[ext_resource type="Script" path="res://scripts/altitude_label.gd" id="5_alt"]
+[ext_resource type="Script" uid="uid://bvpitcxmyl6x3" path="res://scripts/cash_label.gd" id="4_cash"]
+[ext_resource type="Script" uid="uid://dl82d0q15fivb" path="res://scripts/altitude_label.gd" id="5_alt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuel"]
 bg_color = Color(0.2, 0.5, 1, 1)
@@ -44,10 +44,10 @@ offset_bottom = 20.0
 script = ExtResource("4_cash")
 
 [node name="AltitudeLabel" type="Label" parent="CanvasLayer" unique_id=521807031]
+anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -20.0
-offset_bottom = 0.0
 offset_right = 120.0
 script = ExtResource("5_alt")
 
