@@ -1,7 +1,16 @@
-[gd_scene load_steps=30 format=3 uid="uid://djioo12jvqb7l"]
+[gd_scene format=3 uid="uid://djioo12jvqb7l"]
 
 [ext_resource type="Texture2D" uid="uid://ntmii3t76vmm" path="res://assets/images/player/Pod Movement.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://dewewpisepmp3" path="res://scripts/player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://bolkcd7ghbr47" path="res://assets/Pod Movement.png" id="2_i3pqv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hik5"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(210, 284, 70, 71)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtqh7"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(280, 284, 70, 71)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4flbx"]
 atlas = ExtResource("1_4flbx")
@@ -107,6 +116,39 @@ region = Rect2(490, 140, 70, 70)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_7hik5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtqh7")
+}],
+"loop": true,
+"name": &"idle_bottom",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7hik5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtqh7")
+}],
+"loop": true,
+"name": &"idle_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7hik5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtqh7")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_4flbx")
 }, {
 "duration": 1.0,
@@ -129,7 +171,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"move_bottom",
-"speed": 5.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -155,7 +197,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"move_left",
-"speed": 5.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -193,20 +235,22 @@ animations = [{
 }],
 "loop": true,
 "name": &"move_up",
-"speed": 5.0
+"speed": 13.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
 radius = 21.029741
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" unique_id=765433891]
 script = ExtResource("1_onrkg")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=170058985]
+position = Vector2(13, 0)
 sprite_frames = SubResource("SpriteFrames_urp6f")
-animation = &"move_up"
-frame_progress = 0.1439288
+animation = &"move_left"
+frame_progress = 0.1880214
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=431601373]
+visible = false
 position = Vector2(11, 7)
 shape = SubResource("CircleShape2D_onrkg")

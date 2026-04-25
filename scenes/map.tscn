@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://ha4n7ilab8nd"]
+
+[ext_resource type="PackedScene" uid="uid://djioo12jvqb7l" path="res://scenes/player.tscn" id="1_4xfga"]
+[ext_resource type="Script" uid="uid://fiye1imymukk" path="res://scripts/main.gd" id="1_gldc4"]
+[ext_resource type="Script" uid="uid://cl5ywqfpts4fe" path="res://scripts/fuel_bar.gd" id="2_paxxb"]
+[ext_resource type="Script" uid="uid://2pqt4ro7l4x" path="res://scripts/health_bar.gd" id="3_hbar"]
+[ext_resource type="Script" uid="uid://bvpitcxmyl6x3" path="res://scripts/cash_label.gd" id="4_cash"]
+[ext_resource type="Script" uid="uid://dl82d0q15fivb" path="res://scripts/altitude_label.gd" id="5_alt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuel"]
+bg_color = Color(0.2, 0.5, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_health"]
+bg_color = Color(0.2, 0.85, 0.3, 1)
+
+[node name="Map" type="Node2D" unique_id=673338625]
+script = ExtResource("1_gldc4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=703247256]
+
+[node name="FuelBar" type="ProgressBar" parent="CanvasLayer" unique_id=521807028]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_bottom = 29.0
+grow_horizontal = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_fuel")
+value = 100.0
+script = ExtResource("2_paxxb")
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer" unique_id=521807029]
+offset_right = 50.0
+offset_bottom = 29.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_health")
+value = 100.0
+script = ExtResource("3_hbar")
+
+[node name="CashLabel" type="Label" parent="CanvasLayer" unique_id=521807030]
+offset_left = 100.0
+offset_top = 5.0
+offset_right = 220.0
+offset_bottom = 20.0
+script = ExtResource("4_cash")
+
+[node name="AltitudeLabel" type="Label" parent="CanvasLayer" unique_id=521807031]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 120.0
+script = ExtResource("5_alt")
+
+[node name="player" parent="." unique_id=1130869114 instance=ExtResource("1_4xfga")]
