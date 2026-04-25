@@ -372,6 +372,8 @@ radius = 21.029741
 
 [node name="player" type="CharacterBody2D" unique_id=765433891]
 script = ExtResource("1_onrkg")
+maxFuel = null
+max_health = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=170058985]
 position = Vector2(13, 0)

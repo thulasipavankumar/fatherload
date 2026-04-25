@@ -2,9 +2,9 @@ extends Node2D
 
 func _ready() -> void:
 	$player.died.connect(_on_player_died)
+	$player.underground = $Underground
 	$player.set_physics_process(false)
 	$UILayer/RestartButton.hide()
-	consume_fuel(90)
 
 func _process(delta: float) -> void:
 	pass
@@ -15,6 +15,7 @@ func _on_start_button_pressed() -> void:
 	$FuelDrainTimer.start()
 
 func _on_restart_button_pressed() -> void:
+	$Underground.reset()
 	$player.reset()
 	$UILayer/RestartButton.hide()
 	$player.set_physics_process(true)
