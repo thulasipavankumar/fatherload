@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://cm8mg1xbohm8j"]
+[gd_scene format=3 uid="uid://cqjnmd5lir8ry"]
 
 [ext_resource type="Texture2D" uid="uid://dbfhxemmojbnk" path="res://assets/images/underground/PC _ Computer - Motherload_ Goldium Edition - Tiles - Underground.png" id="1_5558j"]
 [ext_resource type="Script" uid="uid://tdua8ieh35ye" path="res://scenes/underground.gd" id="1_osycu"]
-[ext_resource type="Script" uid="uid://csl8nfrg65j65" path="res://scripts/ore_data.gd" id="2_2be3n"]
+[ext_resource type="Script" path="res://scripts/ore_data.gd" id="2_2be3n"]
 [ext_resource type="Texture2D" uid="uid://dl0kd16gsxsg8" path="res://assets/images/underground/Mineral & Ore Asset Collection - StewV/sprite_sheets/transparent_background/StewV_Minerals_Sheet_01T.png" id="2_osycu"]
 [ext_resource type="Resource" uid="uid://fvbyahhty6c3" path="res://data/ores/iron.tres" id="3_hxwvr"]
 [ext_resource type="Texture2D" uid="uid://chqjc2ixqg0u6" path="res://assets/images/underground/Mineral & Ore Asset Collection - StewV/sprite_sheets/transparent_background/StewV_Minerals_Sheet_02T.png" id="3_iubgi"]

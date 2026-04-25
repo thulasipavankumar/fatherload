@@ -4,32 +4,56 @@ extends Node2D
 @onready var ground_layer: TileMapLayer = $Ground
 @onready var ore_layer: TileMapLayer = $Ores
 
+# Probability that any given tile spawns as an empty tunnel instead of dirt.
 const tunnel_probability = 0.15;
+# Probability that a non-tunnel tile contains an ore (subject to depth weighting).
 const ore_probability = 0.5;
+# Ore spawn chances below this threshold are ignored to avoid near-zero rolls.
 const ore_spawn_chance_cutoff = 0.0001;
 
 const tunnel_tile_source_id = 0
 const tunnel_tile_coords = Vector2i(0, 6)
 
 func _ready():
-	print("Test")
 	randomize()
-	var chunk = generate_chunk(100, 100, 0, Vector2i(0, 0))
-	await get_tree().create_timer(5.0).timeout
-	dig(Vector2i(0,0))
-	
+	generate_chunk(100, 100, 0, Vector2i(0, 0))
+
+# Regenerates the entire terrain with a new random seed (called on game restart).
+func reset():
+	randomize()
+	generate_chunk(100, 100, 0, Vector2i(0, 0))
+
+# Returns true if the tile at pos can be drilled (i.e. it is dirt or ore, not a tunnel).
+func is_diggable(pos: Vector2i) -> bool:
+	var source_id := ground_layer.get_cell_source_id(pos)
+	if source_id == -1:
+		return false
+	var atlas_coords := ground_layer.get_cell_atlas_coords(pos)
+	return atlas_coords != tunnel_tile_coords
+
+# Returns true if the tile at pos is an explicit tunnel tile.
+# Used to distinguish tunnels from out-of-bounds empty space.
+func is_tunnel(pos: Vector2i) -> bool:
+	var source_id := ground_layer.get_cell_source_id(pos)
+	if source_id == -1:
+		return false
+	return ground_layer.get_cell_atlas_coords(pos) == tunnel_tile_coords
+
+# Converts a solid tile at pos into a tunnel (removes ore overlay, sets tunnel tile).
 func dig(pos: Vector2i):
 	_clear_ore(pos)
 	_set_tunnel(pos)
-	
+
+# Generates a width×height block of tiles starting at origin, with depth used for
+# ore distribution weighting. Returns the raw chunk data array.
 func generate_chunk(width: int, height: int, depth: int, origin: Vector2i):
 	var chunk = _create_chunk(width, height, depth)
 	_render_chunk(chunk, origin)
 	return chunk
-	
+
 func _clear_ore(pos: Vector2i):
 	ore_layer.erase_cell(pos)
-	
+
 func _set_tunnel(pos: Vector2i):
 	ground_layer.set_cell(
 		pos,
@@ -37,6 +61,7 @@ func _set_tunnel(pos: Vector2i):
 		tunnel_tile_coords
 	)
 
+# Writes the chunk data array to both tile map layers, clearing any previous tiles first.
 func _render_chunk(chunk: Array, chunk_origin: Vector2i):
 	for y in range(chunk.size()):
 		for x in range(chunk[y].size()):
@@ -80,6 +105,7 @@ func _render_chunk(chunk: Array, chunk_origin: Vector2i):
 						Vector2i(0, 3)
 					)
 
+# Builds the raw chunk array by calling _create_ground_cell for every position.
 func _create_chunk(width: int, height: int, depth: int):
 	var chunk: Array = [];
 	for y in range(height):
@@ -89,17 +115,19 @@ func _create_chunk(width: int, height: int, depth: int):
 			row.append(_create_ground_cell(cell_depth))
 		chunk.append(row)
 	return chunk
-	
+
+# Decides the type of a single tile at the given depth:
+# tunnel (15% chance) → dirt → ore (weighted by depth proximity to each ore's optimal range).
 func _create_ground_cell(depth: int):
-	var cell := GroundTile.new(GroundTypes.GroundType.DIRT)			
+	var cell := GroundTile.new(GroundTypes.GroundType.DIRT)
 	if randf() < tunnel_probability:
 		cell.type = GroundTypes.GroundType.TUNNEL
 		return cell;
-		
-	if (randf() < ore_probability): 
+
+	if (randf() < ore_probability):
 		var total := 0.0
 		var effective_chances := {}
-		
+
 		for ore in ores:
 			var factor := _get_depth_factor(depth, ore)
 			var spawn_chance := ore.spawn_chance * factor
@@ -112,6 +140,7 @@ func _create_ground_cell(depth: int):
 		if total <= 0.0:
 			return cell
 
+		# Weighted random selection across all eligible ores.
 		var roll := randf() * total
 		var running := 0.0
 
@@ -121,9 +150,11 @@ func _create_ground_cell(depth: int):
 				cell.type = GroundTypes.GroundType.ORE
 				cell.ore = ore
 				break
-		
+
 	return cell
-	
+
+# Returns a 0–1 multiplier for how likely an ore is to spawn at this depth.
+# Full probability (1.0) within the ore's optimal range; gaussian falloff outside it.
 func _get_depth_factor(depth: int, ore: OreData) -> float:
 	var min_d := ore.min_optimal_depth
 	var max_d := ore.max_optimal_depth
@@ -143,6 +174,7 @@ func _get_depth_factor(depth: int, ore: OreData) -> float:
 
 	return 0.0
 
+# Debug helper — prints the chunk as ASCII art (space=tunnel, dot=dirt, letter=ore initial).
 func _print_chunk_ascii(chunk: Array):
 	for row in chunk:
 		var line := ""
