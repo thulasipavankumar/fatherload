@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dl0kd16gsxsg8"
-path="res://.godot/imported/StewV_Minerals_Sheet_01T.png-5a12110b13ed490b8cb57b8f0cf099c0.ctex"
+uid="uid://ca66qcpkq8lva"
+path="res://.godot/imported/tunnel_tile.png-58f95faff37289956d756abafd92c31a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Mineral & Ore Asset Collection - StewV/sprite_sheets/transparent_background/StewV_Minerals_Sheet_01T.png"
-dest_files=["res://.godot/imported/StewV_Minerals_Sheet_01T.png-5a12110b13ed490b8cb57b8f0cf099c0.ctex"]
+source_file="res://assets/images/underground/tunnel_tile.png"
+dest_files=["res://.godot/imported/tunnel_tile.png-58f95faff37289956d756abafd92c31a.ctex"]
 
 [params]
 
