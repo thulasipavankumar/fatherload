@@ -5,6 +5,7 @@ var currentFuel: int = maxFuel
 signal fuel_changed(new_fuel)
 @onready var sfx_move: AudioStreamPlayer = $sfx_move
 @onready var sfx_fly: AudioStreamPlayer = $sfx_fly
+@onready var sfx_mine: AudioStreamPlayer2D = $sfx_mine
 
 @export var max_health := 100
 var health := max_health
@@ -78,12 +79,17 @@ func try_dig() -> void:
 	elif input_dir.y > 0:
 		dig_dir = Vector2.DOWN
 	if dig_dir == Vector2.ZERO:
+		sfx_mine.stop()
 		return
 	var dig_point := position + dig_dir * 30
 	var local_pos := dig_point - underground.position
 	var tile_pos: Vector2i = underground.ground_layer.local_to_map(local_pos)
 	if underground.is_diggable(tile_pos):
-		underground.dig(tile_pos)
+		var ore_value: float = underground.dig(tile_pos)
+		if ore_value > 0:
+			add_cash(int(ore_value))
+		if not sfx_mine.playing:
+			sfx_mine.play()
 
 # Returns true when the tile just below the player's feet is solid (dirt or ore).
 func _is_on_ground() -> bool:
@@ -184,7 +190,7 @@ func play_animation(prefix: String, dir: Vector2) -> void:
 		if prefix == "move":
 			sfx_move.stop()
 			if !sfx_fly.playing:
-				sfx_fly.play()
+				sfx_fly.play(5)
 	elif dir.y > 0:
 		animated_sprite_2d.play(prefix + "_bottom")
 		if prefix == "move":
