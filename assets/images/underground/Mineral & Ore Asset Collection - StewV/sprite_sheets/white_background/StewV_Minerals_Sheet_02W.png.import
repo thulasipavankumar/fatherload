@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bj2l7hamoo3s7"
-path="res://.godot/imported/StewV_Minerals_Sheet_02W.png-846633e99cb8152148348bea0b7e7795.ctex"
+path="res://.godot/imported/StewV_Minerals_Sheet_02W.png-051663a0d0688151dc683a9d94eaf510.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Mineral & Ore Asset Collection - StewV/sprite_sheets/white_background/StewV_Minerals_Sheet_02W.png"
-dest_files=["res://.godot/imported/StewV_Minerals_Sheet_02W.png-846633e99cb8152148348bea0b7e7795.ctex"]
+source_file="res://assets/images/underground/Mineral & Ore Asset Collection - StewV/sprite_sheets/white_background/StewV_Minerals_Sheet_02W.png"
+dest_files=["res://.godot/imported/StewV_Minerals_Sheet_02W.png-051663a0d0688151dc683a9d94eaf510.ctex"]
 
 [params]
 

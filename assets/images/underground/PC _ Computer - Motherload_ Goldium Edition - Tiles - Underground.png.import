@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdfdms6rvglap"
-path="res://.godot/imported/StewV_Minerals_Sheet_03W.png-373dd0fab6f8307a4b88146b94cfebce.ctex"
+uid="uid://dbfhxemmojbnk"
+path="res://.godot/imported/PC _ Computer - Motherload_ Goldium Edition - Tiles - Underground.png-dc8c1a6715f0312bc6f407f178d0a136.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Mineral & Ore Asset Collection - StewV/sprite_sheets/white_background/StewV_Minerals_Sheet_03W.png"
-dest_files=["res://.godot/imported/StewV_Minerals_Sheet_03W.png-373dd0fab6f8307a4b88146b94cfebce.ctex"]
+source_file="res://assets/images/underground/PC _ Computer - Motherload_ Goldium Edition - Tiles - Underground.png"
+dest_files=["res://.godot/imported/PC _ Computer - Motherload_ Goldium Edition - Tiles - Underground.png-dc8c1a6715f0312bc6f407f178d0a136.ctex"]
 
 [params]
 

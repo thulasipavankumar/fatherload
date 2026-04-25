@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://cm8mg1xbohm8j"]
+
+[ext_resource type="Texture2D" uid="uid://dbfhxemmojbnk" path="res://assets/images/underground/PC _ Computer - Motherload_ Goldium Edition - Tiles - Underground.png" id="1_5558j"]
+[ext_resource type="Script" uid="uid://tdua8ieh35ye" path="res://scenes/underground.gd" id="1_osycu"]
+[ext_resource type="Script" uid="uid://csl8nfrg65j65" path="res://scripts/ore_data.gd" id="2_2be3n"]
+[ext_resource type="Texture2D" uid="uid://dl0kd16gsxsg8" path="res://assets/images/underground/Mineral & Ore Asset Collection - StewV/sprite_sheets/transparent_background/StewV_Minerals_Sheet_01T.png" id="2_osycu"]
+[ext_resource type="Resource" uid="uid://fvbyahhty6c3" path="res://data/ores/iron.tres" id="3_hxwvr"]
+[ext_resource type="Texture2D" uid="uid://chqjc2ixqg0u6" path="res://assets/images/underground/Mineral & Ore Asset Collection - StewV/sprite_sheets/transparent_background/StewV_Minerals_Sheet_02T.png" id="3_iubgi"]
+[ext_resource type="Texture2D" uid="uid://bevchnglpefy0" path="res://assets/images/underground/Mineral & Ore Asset Collection - StewV/sprite_sheets/transparent_background/StewV_Minerals_Sheet_03T.png" id="4_6vnne"]
+[ext_resource type="Resource" uid="uid://dvqq4u0ayo76f" path="res://data/ores/asteroid.tres" id="4_ifknv"]
+[ext_resource type="Resource" uid="uid://di1kwscohduts" path="res://data/ores/bronze.tres" id="5_ofvo7"]
+[ext_resource type="Resource" uid="uid://c7ajtcyd68e0d" path="res://data/ores/diamond.tres" id="6_4cgia"]
+[ext_resource type="Resource" uid="uid://bf705sea3db52" path="res://data/ores/dinosaur_bones.tres" id="7_maujv"]
+[ext_resource type="Resource" uid="uid://cy0nwbbqr1vxa" path="res://data/ores/emerald.tres" id="8_4mj28"]
+[ext_resource type="Resource" uid="uid://7xsipfuqc72j" path="res://data/ores/gold.tres" id="9_u5fps"]
+[ext_resource type="Resource" uid="uid://btymlj05p6xr8" path="res://data/ores/lapis_lazuli.tres" id="10_aijtf"]
+[ext_resource type="Resource" uid="uid://db1v6mt33ik0n" path="res://data/ores/mithril.tres" id="11_xaln6"]
+[ext_resource type="Resource" uid="uid://ubsit1ix5mi8" path="res://data/ores/oil.tres" id="12_edeay"]
+[ext_resource type="Resource" uid="uid://bf6r4tkfb2j7f" path="res://data/ores/platinum.tres" id="13_7fg5t"]
+[ext_resource type="Resource" uid="uid://c33052wy23fwa" path="res://data/ores/relic.tres" id="14_u3x31"]
+[ext_resource type="Resource" uid="uid://c3r2bw5b6npgq" path="res://data/ores/rock.tres" id="15_ucytc"]
+[ext_resource type="Resource" uid="uid://cvswedeowkxnr" path="res://data/ores/ruby.tres" id="16_6c88v"]
+[ext_resource type="Resource" uid="uid://b8bs7d583hrsj" path="res://data/ores/sapphire.tres" id="17_gybvo"]
+[ext_resource type="Resource" uid="uid://d2i1a2eiw8147" path="res://data/ores/scrap.tres" id="18_kmhou"]
+[ext_resource type="Resource" uid="uid://tdj24ax6ot6" path="res://data/ores/silver.tres" id="19_dlbyx"]
+[ext_resource type="Resource" uid="uid://c5iehmpfdm4lh" path="res://data/ores/treasure.tres" id="20_7qqxa"]
+[ext_resource type="Resource" uid="uid://bw4wsyv3pq50w" path="res://data/ores/uranium.tres" id="21_t5xy4"]
+[ext_resource type="Resource" uid="uid://c0eoboy8kofjv" path="res://data/ores/vulcanic_rock.tres" id="22_jhyyg"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x50qk"]
+texture = ExtResource("1_5558j")
+texture_region_size = Vector2i(50, 50)
+6:0/0 = 0
+6:4/0 = 0
+2:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4b2bf"]
+texture = ExtResource("2_osycu")
+texture_region_size = Vector2i(32, 32)
+0:3/0 = 0
+1:3/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+0:4/0 = 0
+0:5/0 = 0
+3:2/0 = 0
+2:2/0 = 0
+1:2/0 = 0
+2:0/0 = 0
+5:2/0 = 0
+0:2/0 = 0
+1:1/0 = 0
+0:1/0 = 0
+6:3/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+1:5/0 = 0
+4:1/0 = 0
+6:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dikfm"]
+texture = ExtResource("3_iubgi")
+texture_region_size = Vector2i(32, 32)
+2:2/0 = 0
+5:2/0 = 0
+5:1/0 = 0
+7:0/0 = 0
+7:1/0 = 0
+4:4/0 = 0
+3:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q6nb4"]
+texture = ExtResource("4_6vnne")
+texture_region_size = Vector2i(32, 32)
+6:5/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+6:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_mah8q"]
+tile_size = Vector2i(50, 50)
+terrain_set_0/mode = 0
+sources/1 = SubResource("TileSetAtlasSource_4b2bf")
+sources/2 = SubResource("TileSetAtlasSource_dikfm")
+sources/3 = SubResource("TileSetAtlasSource_q6nb4")
+sources/0 = SubResource("TileSetAtlasSource_x50qk")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2be3n"]
+texture = ExtResource("1_5558j")
+texture_region_size = Vector2i(50, 50)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:5/0 = 0
+5:6/0 = 0
+0:2/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+4:6/0 = 0
+3:5/0 = 0
+2:5/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_hxwvr"]
+tile_size = Vector2i(50, 50)
+sources/0 = SubResource("TileSetAtlasSource_2be3n")
+
+[node name="Underground" type="Node2D" unique_id=55342288]
+script = ExtResource("1_osycu")
+ores = Array[ExtResource("2_2be3n")]([ExtResource("3_hxwvr"), ExtResource("4_ifknv"), ExtResource("5_ofvo7"), ExtResource("6_4cgia"), ExtResource("7_maujv"), ExtResource("8_4mj28"), ExtResource("9_u5fps"), ExtResource("3_hxwvr"), ExtResource("10_aijtf"), ExtResource("11_xaln6"), ExtResource("12_edeay"), ExtResource("13_7fg5t"), ExtResource("14_u3x31"), ExtResource("15_ucytc"), ExtResource("16_6c88v"), ExtResource("17_gybvo"), ExtResource("18_kmhou"), ExtResource("19_dlbyx"), ExtResource("20_7qqxa"), ExtResource("21_t5xy4"), ExtResource("22_jhyyg")])
+
+[node name="Ores" type="TileMapLayer" parent="." unique_id=2125805592]
+z_index = 1
+tile_set = SubResource("TileSet_mah8q")
+
+[node name="Ground" type="TileMapLayer" parent="." unique_id=331864159]
+tile_set = SubResource("TileSet_hxwvr")
