@@ -190,7 +190,7 @@ func play_animation(prefix: String, dir: Vector2) -> void:
 		if prefix == "move":
 			sfx_move.stop()
 			if !sfx_fly.playing:
-				sfx_fly.play(5)
+				sfx_fly.play()
 	elif dir.y > 0:
 		animated_sprite_2d.play(prefix + "_bottom")
 		if prefix == "move":

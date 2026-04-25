@@ -391,7 +391,8 @@ volume_db = -1.954
 
 [node name="sfx_fly" type="AudioStreamPlayer" parent="." unique_id=1110311842]
 stream = ExtResource("5_qlg0r")
-volume_db = -1.954
+volume_db = -6.427
+playback_type = 1
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1611243886]
 process_callback = 0

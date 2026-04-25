@@ -95,8 +95,6 @@ wait_time = 6.0
 [node name="player" parent="." unique_id=1130869114 instance=ExtResource("1_4xfga")]
 position = Vector2(160, 65)
 up_direction = Vector2(0, 1)
-maxFuel = 100
-max_health = 100
 
 [connection signal="pressed" from="UILayer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="UILayer/RestartButton" to="." method="_on_restart_button_pressed"]
