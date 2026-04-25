@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bolkcd7ghbr47" path="res://assets/Pod Movement.png" id="2_i3pqv"]
 [ext_resource type="AudioStream" uid="uid://b1ipxs4rbv11y" path="res://assets/audio/miner-move.mp3" id="4_dqkch"]
 [ext_resource type="AudioStream" uid="uid://bfxxv5npktxub" path="res://assets/audio/drone-fly.mp3" id="5_qlg0r"]
+[ext_resource type="AudioStream" uid="uid://djlmfxfeewyxy" path="res://assets/audio/mining.mp3" id="6_tuyoq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7hik5"]
 atlas = ExtResource("2_i3pqv")
@@ -372,8 +373,6 @@ radius = 21.029741
 
 [node name="player" type="CharacterBody2D" unique_id=765433891]
 script = ExtResource("1_onrkg")
-maxFuel = null
-max_health = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=170058985]
 position = Vector2(13, 0)
@@ -397,3 +396,6 @@ volume_db = -1.954
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 1.0
+
+[node name="sfx_mine" type="AudioStreamPlayer2D" parent="." unique_id=1463407896]
+stream = ExtResource("6_tuyoq")
