@@ -85,7 +85,9 @@ func try_dig() -> void:
 	var local_pos := dig_point - underground.position
 	var tile_pos: Vector2i = underground.ground_layer.local_to_map(local_pos)
 	if underground.is_diggable(tile_pos):
-		underground.dig(tile_pos)
+		var ore_value: float = underground.dig(tile_pos)
+		if ore_value > 0:
+			add_cash(int(ore_value))
 		if not sfx_mine.playing:
 			sfx_mine.play()
 

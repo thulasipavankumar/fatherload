@@ -14,14 +14,27 @@ const ore_spawn_chance_cutoff = 0.0001;
 const tunnel_tile_source_id = 0
 const tunnel_tile_coords = Vector2i(0, 6)
 
+# Maps tile position → OreData so dig() can return the correct value.
+var ore_map: Dictionary = {}
+
 func _ready():
 	randomize()
+	_assign_missing_values()
 	generate_chunk(100, 100, 0, Vector2i(0, 0))
 
 # Regenerates the entire terrain with a new random seed (called on game restart).
 func reset():
 	randomize()
+	ore_map.clear()
 	generate_chunk(100, 100, 0, Vector2i(0, 0))
+
+# Any ore with value == 0 in its .tres file gets a random value scaled by rarity.
+# Rarer ores (lower spawn_chance) receive proportionally higher values.
+func _assign_missing_values():
+	for ore in ores:
+		if ore.value == 0.0:
+			var rarity_scale: float = 100.0 / max(ore.spawn_chance, 1.0)
+			ore.value = round(clampf(randf_range(5.0, 20.0) * rarity_scale, 1.0, 500.0))
 
 # Returns true if the tile at pos can be drilled (i.e. it is dirt or ore, not a tunnel).
 func is_diggable(pos: Vector2i) -> bool:
@@ -39,10 +52,15 @@ func is_tunnel(pos: Vector2i) -> bool:
 		return false
 	return ground_layer.get_cell_atlas_coords(pos) == tunnel_tile_coords
 
-# Converts a solid tile at pos into a tunnel (removes ore overlay, sets tunnel tile).
-func dig(pos: Vector2i):
+# Converts a solid tile into a tunnel and returns the ore value (0 if it was plain dirt).
+func dig(pos: Vector2i) -> float:
+	var value := 0.0
+	if ore_map.has(pos):
+		value = ore_map[pos].value
+		ore_map.erase(pos)
 	_clear_ore(pos)
 	_set_tunnel(pos)
+	return value
 
 # Generates a width×height block of tiles starting at origin, with depth used for
 # ore distribution weighting. Returns the raw chunk data array.
@@ -71,39 +89,23 @@ func _render_chunk(chunk: Array, chunk_origin: Vector2i):
 				chunk_origin.y + y
 			)
 
-			# Clear old tiles
+			# Clear old tiles and any stale ore entry.
 			ground_layer.erase_cell(tile_pos)
 			ore_layer.erase_cell(tile_pos)
+			ore_map.erase(tile_pos)
 
 			match cell.type:
 				GroundTypes.GroundType.TUNNEL:
-					ground_layer.set_cell(
-						tile_pos,
-						0,
-						Vector2i(0, 6)
-					)
+					ground_layer.set_cell(tile_pos, 0, Vector2i(0, 6))
 
 				GroundTypes.GroundType.DIRT:
-					ground_layer.set_cell(
-						tile_pos,
-						0,
-						Vector2i(0, 0)
-					)
+					ground_layer.set_cell(tile_pos, 0, Vector2i(0, 0))
 
 				GroundTypes.GroundType.ORE:
-					# Dirt background first
-					ground_layer.set_cell(
-						tile_pos,
-						0,
-						Vector2i(0, 0)
-					)
-
-					# Ore overlay
-					ore_layer.set_cell(
-						tile_pos,
-						1,
-						Vector2i(0, 3)
-					)
+					# Dirt background first, then ore overlay.
+					ground_layer.set_cell(tile_pos, 0, Vector2i(0, 0))
+					ore_layer.set_cell(tile_pos, 1, Vector2i(0, 3))
+					ore_map[tile_pos] = cell.ore
 
 # Builds the raw chunk array by calling _create_ground_cell for every position.
 func _create_chunk(width: int, height: int, depth: int):
