@@ -1,10 +1,28 @@
 extends Node2D
 
 func _ready() -> void:
-	take_damage(50)
+	$player.died.connect(_on_player_died)
+	$player.set_physics_process(false)
+	$UILayer/RestartButton.hide()
 
 func _process(delta: float) -> void:
 	pass
+
+func _on_start_button_pressed() -> void:
+	$UILayer/StartButton.hide()
+	$player.set_physics_process(true)
+	$FuelDrainTimer.start()
+
+func _on_restart_button_pressed() -> void:
+	$player.reset()
+	$UILayer/RestartButton.hide()
+	$player.set_physics_process(true)
+	$FuelDrainTimer.start()
+
+func _on_player_died() -> void:
+	$player.set_physics_process(false)
+	$FuelDrainTimer.stop()
+	$UILayer/RestartButton.show()
 
 func _on_fuel_drain_timer_timeout() -> void:
 	consume_fuel(10)

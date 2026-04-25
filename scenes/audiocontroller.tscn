@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://54losgxtdccy"]
+[gd_scene format=3 uid="uid://b5fckuxkjnagn"]
 
-[ext_resource type="Script" uid="uid://b1gl27vpwo435" path="res://scenes/audiocontroller.gd" id="1_014ei"]
+[ext_resource type="Script" path="res://scenes/audiocontroller.gd" id="1_014ei"]
 [ext_resource type="AudioStream" uid="uid://b1ipxs4rbv11y" path="res://assets/audio/miner-move.mp3" id="1_dyo0s"]
 
 [node name="Audiocontroller" type="Node2D" unique_id=365567068]

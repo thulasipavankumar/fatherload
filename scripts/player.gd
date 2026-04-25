@@ -4,6 +4,7 @@ extends CharacterBody2D
 var currentFuel: int = maxFuel
 signal fuel_changed(new_fuel)
 @onready var sfx_move: AudioStreamPlayer = $sfx_move
+@onready var sfx_fly: AudioStreamPlayer = $sfx_fly
 
 
 @export var max_health := 100
@@ -16,12 +17,23 @@ signal cash_changed(new_cash)
 signal died
 const SPEED = 100.0
 var last_direction: Vector2 = Vector2.RIGHT
+var _start_position: Vector2
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 
 func increase_fuel_capacity(capacity:int):
 	maxFuel = capacity
 
+func _ready() -> void:
+	_start_position = position
+
+func reset() -> void:
+	health = max_health
+	currentFuel = maxFuel
+	position = _start_position
+	velocity = Vector2.ZERO
+	emit_signal("health_changed", health)
+	emit_signal("fuel_changed", currentFuel)
 
 func _physics_process(delta: float) -> void:
 	process_movement()
@@ -42,6 +54,8 @@ func process_animation():
 	if velocity!= Vector2.ZERO:
 		play_animation("move",last_direction)
 	else: 
+		sfx_move.stop()
+		sfx_fly.stop()
 		play_animation("idle",last_direction)
 	
 	
@@ -55,22 +69,28 @@ func process_movement() -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_vector("left","right","up","down")
 	if direction!=Vector2.ZERO:
-		if !sfx_move.playing:
-			sfx_move.play()
 		velocity = direction * SPEED
 		last_direction = direction
 	else:
-		sfx_move.stop()
 		velocity = Vector2.ZERO
 		
-func play_animation(prefix:String,dir:Vector2) -> void:
+func play_animation(prefix: String, dir: Vector2) -> void:
 	if dir.x != 0:
 		animated_sprite_2d.flip_h = dir.x > 0
-		animated_sprite_2d.play(prefix+"_left")
-	elif dir.y<0:
-		animated_sprite_2d.play(prefix+"_up")
-	elif dir.y>0:
-		animated_sprite_2d.play(prefix+"_bottom")
+		animated_sprite_2d.play(prefix + "_left")
+		sfx_fly.stop()
+		if !sfx_move.playing:
+			sfx_move.play()
+	elif dir.y < 0:
+		animated_sprite_2d.play(prefix + "_up")
+		sfx_move.stop()
+		if !sfx_fly.playing:
+			sfx_fly.play()
+	elif dir.y > 0:
+		animated_sprite_2d.play(prefix + "_bottom")
+		sfx_fly.stop()
+		if !sfx_move.playing:
+			sfx_move.play()
 		
 	
 func add_cash(amount: int):
