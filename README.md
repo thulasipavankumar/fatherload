@@ -10,6 +10,7 @@ Play it [here](https://thulasipavankumar.github.io/fatherload/).
 - The pod falls freely through tunnel spaces and lands on solid ground — use gravity to your advantage.
 - Flying upward is only possible through existing tunnels or above the surface.
 - Fuel drains constantly; running out of fuel or health ends the run.
+- Falling from large heights deals fall damage on landing.
 
 ## Controls
 
@@ -20,6 +21,31 @@ Play it [here](https://thulasipavankumar.github.io/fatherload/).
 | Arrow Up | Fly upward (tunnels and open sky only) |
 
 Horizontal and vertical movement are mutually exclusive — no diagonal movement.
+
+## Fall Damage
+
+Gravity accelerates the pod downward at **400 px/s²**, capped at a terminal velocity of **600 px/s**.
+
+When the pod lands, the impact speed is compared against a safe threshold:
+
+```
+damage = (impact_speed - 300) × 0.2
+```
+
+| Fall duration | Impact speed | Damage |
+|---|---|---|
+| < ~0.75 s | < 300 px/s | 0 |
+| ~1 s | 400 px/s | 20 |
+| ~1.25 s | 500 px/s | 40 |
+| terminal | 600 px/s | 60 |
+
+Falls below **300 px/s** are safe. The terminal velocity cap means no single fall can deal more than **60 damage** (on a 100 HP pod). The three constants in `player.gd` that control this are:
+
+| Constant | Default | Effect |
+|---|---|---|
+| `TERMINAL_VELOCITY` | 600 | Maximum fall speed (px/s) |
+| `FALL_DAMAGE_MIN_SPEED` | 300 | Speed below which falls are safe |
+| `FALL_DAMAGE_MULTIPLIER` | 0.2 | Damage per px/s above the threshold |
 
 ## Ores
 
