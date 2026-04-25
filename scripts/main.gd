@@ -1,11 +1,13 @@
 extends Node2D
 
 func _ready() -> void:
-	consume_fuel(10)
 	take_damage(50)
 
 func _process(delta: float) -> void:
 	pass
+
+func _on_fuel_drain_timer_timeout() -> void:
+	consume_fuel(10)
 
 func consume_fuel(value: int):
 	$player.consume_fuel(value)
