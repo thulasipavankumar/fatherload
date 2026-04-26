@@ -150,6 +150,7 @@ func process_movement(delta: float) -> void:
 	elif _is_on_ground() and velocity.y >= 0:
 		if impact_speed > FALL_DAMAGE_MIN_SPEED:
 			take_damage(int((impact_speed - FALL_DAMAGE_MIN_SPEED) * FALL_DAMAGE_MULTIPLIER))
+			_flash_fall_damage()
 		velocity.y = 0.0
 		_snap_to_floor()
 	else:
@@ -165,6 +166,12 @@ func process_movement(delta: float) -> void:
 		last_direction = Vector2.DOWN
 	elif velocity.y > 10.0:
 		last_direction = Vector2.DOWN
+
+# Briefly tints the sprite red then fades back to normal to signal fall damage.
+func _flash_fall_damage() -> void:
+	animated_sprite_2d.modulate = Color(1.0, 0.2, 0.2, 1.0)
+	var tween := create_tween()
+	tween.tween_property(animated_sprite_2d, "modulate", Color.WHITE, 0.4)
 
 # Drives the sprite state machine: IDLE → TURNING → MOVING.
 # A turning animation plays once when direction changes before looping the move animation.

@@ -392,7 +392,6 @@ volume_db = -1.954
 
 [node name="sfx_fuel_low" type="AudioStreamPlayer" parent="." unique_id=1942933849]
 stream = ExtResource("5_fjrip")
-volume_db = -1.954
 
 [node name="sfx_fly" type="AudioStreamPlayer" parent="." unique_id=1110311842]
 stream = ExtResource("5_qlg0r")
