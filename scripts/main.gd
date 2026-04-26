@@ -12,6 +12,7 @@ func _ready() -> void:
 	stream.loop = true
 	_bgm = AudioStreamPlayer.new()
 	_bgm.stream = stream
+	_bgm.volume_db = -5.0
 	add_child(_bgm)
 
 func _process(delta: float) -> void:
