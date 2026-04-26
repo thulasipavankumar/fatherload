@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://btgrlfhm1alrv"]
 
 [ext_resource type="Script" uid="uid://85wojgbp3s2n" path="res://fuel_station.gd" id="1_84q31"]
-[ext_resource type="Texture2D" uid="uid://bg08wu7ws68g" path="res://assets/images/fuel-station.png" id="2_bt0w5"]
+[ext_resource type="Texture2D" uid="uid://ctj1auybjvuym" path="res://assets/images/new-fuel.png" id="2_bt0w5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bt0w5"]
 size = Vector2(100, 46)
@@ -12,7 +12,7 @@ script = ExtResource("1_84q31")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=954952883]
 z_index = 1
 position = Vector2(934, 311)
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_bt0w5")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=314046898]
@@ -37,7 +37,7 @@ offset_top = 24.0
 offset_right = 149.0
 offset_bottom = 47.0
 text = "Buy fuel?
-1$ = 1 Litre"
+10$ = 1 Litre"
 
 [node name="Button" type="Button" parent="FuelUI/Panel" unique_id=445875292]
 layout_mode = 0

@@ -160,7 +160,7 @@ func process_movement(delta: float) -> void:
 	# Track facing direction for animation — also updated when falling.
 	if direction.x != 0:
 		last_direction = Vector2(sign(direction.x), 0)
-	elif direction.y < 0 and _can_fly_up():
+	elif direction.y < 0:
 		last_direction = Vector2.UP
 	elif direction.y > 0:
 		last_direction = Vector2.DOWN

@@ -17,19 +17,20 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	_player = null
 	$FuelUI.hide()
 
-# Refills as much fuel as the player can afford at $1 per unit.
+# Refills as much fuel as the player can afford at $10 per unit.
 # Shakes the dialogue red if the player has no cash.
 func _on_button_pressed() -> void:
 	if _player == null:
 		return
-	if _player.cash <= 0:
+	if _player.cash < 10:
 		_shake_no_cash()
 		return
 	var fuel_needed: int = _player.maxFuel - _player.currentFuel
 	if fuel_needed <= 0:
 		return
-	var fuel_to_add: int = mini(fuel_needed, _player.cash)
-	_player.spend_cash(fuel_to_add)
+	var fuel_affordable: int = _player.cash / 10
+	var fuel_to_add: int = mini(fuel_needed, fuel_affordable)
+	_player.spend_cash(fuel_to_add * 10)
 	_player.refill_fuel(fuel_to_add)
 
 # Briefly tints the FuelUI red and shakes it to signal insufficient funds.
