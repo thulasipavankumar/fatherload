@@ -11,7 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://cqjnmd5lir8ry" path="res://scenes/underground.tscn" id="8_underground"]
 [ext_resource type="Texture2D" uid="uid://b0g5xiefqttls" path="res://assets/images/sound.png" id="9_mlgqr"]
 [ext_resource type="Texture2D" uid="uid://cxsbbe4a7kukg" path="res://assets/images/mute.png" id="11_gw3fx"]
-[ext_resource type="Script" uid="uid://3axpgkya2sch" path="res://scenes/toggle_button.gd" id="11_wslke"]
+[ext_resource type="Script" uid="uid://3axpgkya2sch" path="res://scripts/toggle_button.gd" id="11_wslke"]
+[ext_resource type="PackedScene" uid="uid://btgrlfhm1alrv" path="res://scenes/fuel_station.tscn" id="13_gw3fx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuel"]
 bg_color = Color(0.2, 0.5, 1, 1)
@@ -107,6 +108,9 @@ wait_time = 6.0
 [node name="player" parent="." unique_id=1130869114 instance=ExtResource("1_4xfga")]
 position = Vector2(160, 65)
 up_direction = Vector2(0, 1)
+
+[node name="FuelStation" parent="." unique_id=73789802 instance=ExtResource("13_gw3fx")]
+position = Vector2(-440, -257)
 
 [connection signal="pressed" from="UILayer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="UILayer/RestartButton" to="." method="_on_restart_button_pressed"]
