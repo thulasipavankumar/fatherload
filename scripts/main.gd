@@ -6,8 +6,10 @@ func _ready() -> void:
 	$player.died.connect(_on_player_died)
 	$player.underground = $Underground
 	$player.set_physics_process(false)
+	$UILayer/StartButton.hide()
 	$UILayer/RestartButton.hide()
 	$UILayer/RunSummaryPanel.hide()
+	$InstructionsLayer.start_pressed.connect(_on_start_button_pressed)
 	_apply_camera_limits()
 
 	var stream: AudioStreamMP3 = load("res://assets/audio/background.mp3")
@@ -32,6 +34,7 @@ func _process(delta: float) -> void:
 
 func _on_start_button_pressed() -> void:
 	$UILayer/StartButton.hide()
+	$InstructionsLayer.hide()
 	$player.set_physics_process(true)
 	$FuelDrainTimer.start()
 	_bgm.play()

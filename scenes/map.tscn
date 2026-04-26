@@ -36,6 +36,7 @@
 [ext_resource type="Resource" uid="uid://c0eoboy8kofjv" path="res://data/ores/vulcanic_rock.tres" id="23_tf62m"]
 [ext_resource type="PackedScene" uid="uid://bfla6kam2sktq" path="res://scenes/background.tscn" id="35_12q1p"]
 [ext_resource type="PackedScene" uid="uid://c3shopscene1x" path="res://scenes/shop.tscn" id="36_shop"]
+[ext_resource type="PackedScene" uid="uid://cinstrscene1x" path="res://scenes/instructions.tscn" id="37_instr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuel"]
 bg_color = Color(0.2, 0.5, 1, 1)
@@ -204,6 +205,8 @@ position = Vector2(-275, -352)
 
 [node name="Shop" parent="." unique_id=200000008 instance=ExtResource("36_shop")]
 position = Vector2(750, 55)
+
+[node name="InstructionsLayer" parent="." unique_id=200000009 instance=ExtResource("37_instr")]
 
 [connection signal="pressed" from="UILayer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="UILayer/RestartButton" to="." method="_on_restart_button_pressed"]
