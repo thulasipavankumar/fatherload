@@ -32,18 +32,18 @@ offset_bottom = 308.0
 
 [node name="Label" type="Label" parent="FuelUI/Panel" unique_id=451635062]
 layout_mode = 0
-offset_left = 78.0
-offset_top = 24.0
-offset_right = 149.0
-offset_bottom = 47.0
+offset_left = 60.0
+offset_top = 22.0
+offset_right = 154.0
+offset_bottom = 71.0
 text = "Buy fuel?
 10$ = 1 Litre"
 
 [node name="Button" type="Button" parent="FuelUI/Panel" unique_id=445875292]
 layout_mode = 0
-offset_left = 74.0
+offset_left = 63.0
 offset_top = 80.0
-offset_right = 154.0
+offset_right = 150.0
 offset_bottom = 111.0
 text = "Purchase"
 
