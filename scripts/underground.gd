@@ -41,7 +41,7 @@ const ORE_TILE_MAP: Dictionary = {
 }
 
 var chunkWidth = 25 ;
-var chunkHeight = 50;
+var chunkHeight = 400;
 # Maps tile position → OreData so dig() can return the correct value.
 var ore_map: Dictionary = {}
 

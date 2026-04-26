@@ -43,6 +43,7 @@ var ores_mined: int = 0
 var best_ore_name: String = "None"
 var best_ore_value: float = 0.0
 var total_cash_earned: int = 0
+var death_cause: String = ""
 
 
 # Upgrades the fuel tank capacity (called from fuel station or shop).
@@ -64,6 +65,7 @@ func _ready() -> void:
 	_base_max_fuel = maxFuel
 	_base_max_health = max_health
 	animated_sprite_2d.animation_finished.connect(_on_animation_finished)
+	
 
 # Resets all stats and position to their starting values (called on restart).
 func reset() -> void:
@@ -79,6 +81,7 @@ func reset() -> void:
 	best_ore_name = "None"
 	best_ore_value = 0.0
 	total_cash_earned = 0
+	death_cause = ""
 	position = _start_position
 	velocity = Vector2.ZERO
 	anim_state = AnimState.IDLE
@@ -97,7 +100,7 @@ func _physics_process(delta: float) -> void:
 	_update_depth_stat()
 
 func _update_depth_stat() -> void:
-	var depth := _start_position.y / 25.0 - position.y / 25.0
+	var depth := (position.y - _start_position.y) / 25.0
 	if depth > max_depth_reached:
 		max_depth_reached = depth
 
@@ -145,6 +148,7 @@ func try_dig() -> void:
 	if underground.is_diggable(tile_pos):
 		var ore_data = underground.ore_map.get(tile_pos, null)
 		var ore_value: float = underground.dig(tile_pos)
+		consume_fuel(1)
 		if ore_value > 0:
 			add_cash(int(ore_value))
 			ores_mined += 1
@@ -317,6 +321,7 @@ func consume_fuel(amount: int):
 	if currentFuel <= 20 and not sfx_fuel_low.playing:
 		sfx_fuel_low.play()
 	if currentFuel <= 0:
+		death_cause = "Fuel exhausted"
 		died.emit()
 
 # Applies damage and triggers death when health hits zero.
@@ -324,4 +329,5 @@ func take_damage(amount: int):
 	health = max(health - amount, 0)
 	emit_signal("health_changed", health)
 	if health <= 0:
+		death_cause = "Hull destroyed"
 		died.emit()

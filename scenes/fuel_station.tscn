@@ -29,21 +29,30 @@ offset_top = 179.0
 offset_right = 707.0
 offset_bottom = 308.0
 
+[node name="TitleLabel" type="Label" parent="FuelUI/Panel" unique_id=451635061]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 5.0
+offset_right = 211.0
+offset_bottom = 25.0
+horizontal_alignment = 1
+text = "FUEL STATION"
+
 [node name="Label" type="Label" parent="FuelUI/Panel" unique_id=451635062]
 layout_mode = 0
 offset_left = 60.0
-offset_top = 22.0
+offset_top = 30.0
 offset_right = 154.0
-offset_bottom = 71.0
+offset_bottom = 79.0
 text = "Buy fuel?
 10$ = 1 Litre"
 
 [node name="Button" type="Button" parent="FuelUI/Panel" unique_id=445875292]
 layout_mode = 0
 offset_left = 63.0
-offset_top = 80.0
+offset_top = 88.0
 offset_right = 150.0
-offset_bottom = 111.0
+offset_bottom = 119.0
 text = "Purchase"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

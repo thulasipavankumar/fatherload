@@ -35,7 +35,7 @@
 [ext_resource type="Resource" uid="uid://bw4wsyv3pq50w" path="res://data/ores/uranium.tres" id="22_ogd7i"]
 [ext_resource type="Resource" uid="uid://c0eoboy8kofjv" path="res://data/ores/vulcanic_rock.tres" id="23_tf62m"]
 [ext_resource type="PackedScene" uid="uid://bfla6kam2sktq" path="res://scenes/background.tscn" id="35_12q1p"]
-[ext_resource type="PackedScene" uid="uid://c3shopscene1x" path="res://scenes/shop.tscn" id="36_shop"]
+[ext_resource type="PackedScene" uid="uid://d3a13tcxruwbh" path="res://scenes/shop.tscn" id="36_shop"]
 [ext_resource type="PackedScene" uid="uid://cinstrscene1x" path="res://scenes/instructions.tscn" id="37_instr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuel"]
@@ -180,6 +180,14 @@ offset_right = 330.0
 offset_bottom = 200.0
 text = "Best Ore:       None"
 
+[node name="DeathCauseLabel" type="Label" parent="UILayer/RunSummaryPanel" unique_id=200000008]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 215.0
+offset_right = 330.0
+offset_bottom = 240.0
+text = "Cause of Death: —"
+
 [node name="PlayAgainBtn" type="Button" parent="UILayer/RunSummaryPanel" unique_id=200000007]
 layout_mode = 0
 offset_left = 85.0
@@ -210,6 +218,6 @@ position = Vector2(750, 55)
 
 [connection signal="pressed" from="UILayer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="UILayer/RestartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="UILayer/RunSummaryPanel/PlayAgainBtn" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="UILayer/ToggleButton" to="UILayer/ToggleButton" method="_on_toggle_button_pressed"]
+[connection signal="pressed" from="UILayer/RunSummaryPanel/PlayAgainBtn" to="." method="_on_restart_button_pressed"]
 [connection signal="timeout" from="FuelDrainTimer" to="." method="_on_fuel_drain_timer_timeout"]

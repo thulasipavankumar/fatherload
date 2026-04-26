@@ -52,6 +52,9 @@ func _on_player_died() -> void:
 	$player.set_physics_process(false)
 	$FuelDrainTimer.stop()
 	_bgm.stop()
+	var death_depth: float = ($player.position.y - $player._start_position.y) / 25.0
+	if death_depth > $player.max_depth_reached:
+		$player.max_depth_reached = death_depth
 	_show_run_summary()
 
 func _show_run_summary() -> void:
@@ -66,6 +69,7 @@ func _show_run_summary() -> void:
 	else:
 		best_str = "None"
 	panel.get_node("BestOreLabel").text = "Best Ore:       " + best_str
+	panel.get_node("DeathCauseLabel").text = "Cause of Death: " + p.death_cause
 	panel.show()
 
 func _on_fuel_drain_timer_timeout() -> void:
