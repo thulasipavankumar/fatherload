@@ -52,6 +52,12 @@ func _on_player_died() -> void:
 	$player.set_physics_process(false)
 	$FuelDrainTimer.stop()
 	_bgm.stop()
+	# Ensure the depth at the moment of death is captured before reading stats,
+	# because _update_depth_stat() runs at the end of _physics_process and may
+	# not have executed yet in the same frame that emitted 'died'.
+	var death_depth: float = $player._start_position.y / 25.0 - $player.position.y / 25.0
+	if death_depth > $player.max_depth_reached:
+		$player.max_depth_reached = death_depth
 	_show_run_summary()
 
 func _show_run_summary() -> void:
