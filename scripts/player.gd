@@ -16,7 +16,8 @@ var cash: int = 0
 signal cash_changed(new_cash)
 
 signal died
-const SPEED = 100.0
+var SPEED: float = 200.0
+var MINING_SPEED: float = 100.0
 const GRAVITY = 400.0
 const TERMINAL_VELOCITY = 600.0
 # Minimum fall speed (px/s) before damage kicks in.
@@ -26,6 +27,8 @@ const FALL_DAMAGE_MULTIPLIER = 0.2
 var last_direction: Vector2 = Vector2.RIGHT
 var _start_position: Vector2
 var _active_direction: Vector2 = Vector2.ZERO
+var _base_max_fuel: int
+var _base_max_health: int
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 enum AnimState { IDLE, TURNING, MOVING }
@@ -34,25 +37,55 @@ var anim_state: AnimState = AnimState.IDLE
 # Set by main.gd so the player can query and modify the tile map.
 var underground: Node2D = null
 
+# Per-run stats tracked for the death summary.
+var max_depth_reached: float = 0.0
+var ores_mined: int = 0
+var best_ore_name: String = "None"
+var best_ore_value: float = 0.0
+var total_cash_earned: int = 0
+
 
 # Upgrades the fuel tank capacity (called from fuel station or shop).
 func increase_fuel_capacity(capacity: int):
 	maxFuel = capacity
 
+func upgrade_fuel_tank(amount: int) -> void:
+	maxFuel += amount
+	currentFuel = min(currentFuel + amount, maxFuel)
+	emit_signal("fuel_changed", currentFuel)
+
+func upgrade_hull(amount: int) -> void:
+	max_health += amount
+	health = min(health + amount, max_health)
+	emit_signal("health_changed", health)
+
 func _ready() -> void:
 	_start_position = position
+	_base_max_fuel = maxFuel
+	_base_max_health = max_health
 	animated_sprite_2d.animation_finished.connect(_on_animation_finished)
 
 # Resets all stats and position to their starting values (called on restart).
 func reset() -> void:
+	maxFuel = _base_max_fuel
+	max_health = _base_max_health
+	SPEED = 200.0
+	MINING_SPEED = 100.0
 	health = max_health
 	currentFuel = maxFuel
+	cash = 0
+	max_depth_reached = 0.0
+	ores_mined = 0
+	best_ore_name = "None"
+	best_ore_value = 0.0
+	total_cash_earned = 0
 	position = _start_position
 	velocity = Vector2.ZERO
 	anim_state = AnimState.IDLE
 	_active_direction = Vector2.ZERO
 	emit_signal("health_changed", health)
 	emit_signal("fuel_changed", currentFuel)
+	emit_signal("cash_changed", cash)
 	sfx_fuel_low.stop()
 
 func _physics_process(delta: float) -> void:
@@ -60,6 +93,22 @@ func _physics_process(delta: float) -> void:
 	process_animation()
 	try_dig()
 	move_and_slide()
+	_clamp_to_map()
+	_update_depth_stat()
+
+func _update_depth_stat() -> void:
+	var depth := _start_position.y / 25.0 - position.y / 25.0
+	if depth > max_depth_reached:
+		max_depth_reached = depth
+
+func _clamp_to_map() -> void:
+	if underground == null:
+		return
+	var tile_size: Vector2i = underground.ground_layer.tile_set.tile_size
+	var used: Rect2i = underground.ground_layer.get_used_rect()
+	var map_left := underground.position.x + used.position.x * tile_size.x
+	var map_right := underground.position.x + used.end.x * tile_size.x
+	position.x = clampf(position.x, map_left, map_right)
 
 # Adds fuel up to the tank capacity.
 func refill_fuel(value: int):
@@ -94,9 +143,15 @@ func try_dig() -> void:
 	var local_pos := dig_point - underground.position
 	var tile_pos: Vector2i = underground.ground_layer.local_to_map(local_pos)
 	if underground.is_diggable(tile_pos):
+		var ore_data = underground.ore_map.get(tile_pos, null)
 		var ore_value: float = underground.dig(tile_pos)
 		if ore_value > 0:
 			add_cash(int(ore_value))
+			ores_mined += 1
+			total_cash_earned += int(ore_value)
+			if ore_data and ore_value > best_ore_value:
+				best_ore_value = ore_value
+				best_ore_name = ore_data.name
 		if not sfx_mine.playing:
 			sfx_mine.play()
 
@@ -138,15 +193,35 @@ func _snap_to_floor() -> void:
 #   - Pressing up flies the player upward only when the tile above is passable.
 #   - Gravity accumulates when airborne; landing snaps the player to the tile surface.
 #   - Pressing down sets a fixed downward speed for active floor-digging.
+func _is_mining(direction: Vector2) -> bool:
+	if underground == null:
+		return false
+	var dig_dir := Vector2.ZERO
+	if abs(direction.x) > abs(direction.y):
+		dig_dir = Vector2(sign(direction.x), 0)
+	elif direction.y > 0:
+		dig_dir = Vector2.DOWN
+	if dig_dir == Vector2.ZERO:
+		return false
+	# Check across two tile-widths ahead so speed stays low between tiles.
+	for dist: float in [20.0, 40.0, 60.0, 80.0]:
+		var dig_point := position + dig_dir * dist
+		var local_pos := dig_point - underground.position
+		var tile_pos: Vector2i = underground.ground_layer.local_to_map(local_pos)
+		if underground.is_diggable(tile_pos):
+			return true
+	return false
+
 func process_movement(delta: float) -> void:
 	var direction := Input.get_vector("left", "right", "up", "down")
 	# Lock to one axis — horizontal takes priority over vertical input.
 	if direction.x != 0:
 		direction.y = 0.0
-	velocity.x = direction.x * SPEED
+	var current_speed := MINING_SPEED if _is_mining(direction) else SPEED
+	velocity.x = direction.x * current_speed
 	var impact_speed := velocity.y
 	if direction.y < 0 and _can_fly_up():
-		velocity.y = -SPEED
+		velocity.y = -current_speed
 	elif _is_on_ground() and velocity.y >= 0:
 		if impact_speed > FALL_DAMAGE_MIN_SPEED:
 			take_damage(int((impact_speed - FALL_DAMAGE_MIN_SPEED) * FALL_DAMAGE_MULTIPLIER))
@@ -156,7 +231,7 @@ func process_movement(delta: float) -> void:
 	else:
 		velocity.y = minf(velocity.y + GRAVITY * delta, TERMINAL_VELOCITY)
 	if direction.y > 0:
-		velocity.y = SPEED
+		velocity.y = current_speed
 	# Track facing direction for animation — also updated when falling.
 	if direction.x != 0:
 		last_direction = Vector2(sign(direction.x), 0)

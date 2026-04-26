@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cinstrscene1x"]
+
+[ext_resource type="Script" uid="uid://cinstrscript1" path="res://scripts/instructions.gd" id="1_instr"]
+
+[node name="InstructionsLayer" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_instr")

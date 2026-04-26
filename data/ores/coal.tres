@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="Ore" format=3 uid="uid://cecpbiw2ori01"]
+[gd_resource type="Resource" script_class="OreData" format=3 uid="uid://cecpbiw2ori01"]
 
-[ext_resource type="Script" uid="uid://csl8nfrg65j65" path="res://scripts/ore_data.gd" id="1_skn1u"]
+[ext_resource type="Script" path="res://scripts/ore_data.gd" id="1_skn1u"]
 
 [resource]
 script = ExtResource("1_skn1u")
@@ -8,6 +8,5 @@ name = "Coal"
 value = 5
 weight = 1.5
 spawn_chance = 60.0
-min_optimal_depth = 0.0
 max_optimal_depth = 40.0
 metadata/_custom_type_script = "uid://csl8nfrg65j65"

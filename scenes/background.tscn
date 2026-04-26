@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bfla6kam2sktq"]
+
+[ext_resource type="Texture2D" uid="uid://bunuxco364y7b" path="res://assets/images/background.png" id="1_bkp1e"]
+[ext_resource type="Texture2D" uid="uid://djfk7dbkwa1yy" path="res://assets/images/background-sky.png" id="2_y0upk"]
+[ext_resource type="Texture2D" uid="uid://c3vjqp8tb0046" path="res://assets/images/background-plane.png" id="3_jougr"]
+[ext_resource type="Script" uid="uid://hes6gh36e1xe" path="res://scripts/background.gd" id="4_bgscr"]
+
+[node name="Background" type="Node2D" unique_id=1680999694]
+position = Vector2(3, 33)
+script = ExtResource("4_bgscr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1914586324]
+position = Vector2(236, 384)
+texture = ExtResource("1_bkp1e")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=333775417]
+position = Vector2(676, 384)
+texture = ExtResource("1_bkp1e")
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=569863946]
+position = Vector2(1124, 384)
+texture = ExtResource("1_bkp1e")
+
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=731484546]
+z_index = -2
+position = Vector2(240.25, 150)
+scale = Vector2(1.0157895, 1)
+texture = ExtResource("2_y0upk")
+
+[node name="Sprite2D5" type="Sprite2D" parent="." unique_id=1568101397]
+z_index = -2
+position = Vector2(719.00006, 150)
+scale = Vector2(1.0318283, 1)
+texture = ExtResource("2_y0upk")
+
+[node name="Sprite2D6" type="Sprite2D" parent="." unique_id=1312606988]
+z_index = -2
+position = Vector2(1208, 150)
+scale = Vector2(1.0646696, 1)
+texture = ExtResource("2_y0upk")
+
+[node name="plane" type="Sprite2D" parent="." unique_id=1310140843]
+position = Vector2(1321, 222)
+texture = ExtResource("3_jougr")

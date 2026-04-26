@@ -3,16 +3,40 @@
 [ext_resource type="PackedScene" uid="uid://djioo12jvqb7l" path="res://scenes/player.tscn" id="1_4xfga"]
 [ext_resource type="Script" uid="uid://fiye1imymukk" path="res://scripts/main.gd" id="1_gldc4"]
 [ext_resource type="Script" uid="uid://cl5ywqfpts4fe" path="res://scripts/fuel_bar.gd" id="2_paxxb"]
+[ext_resource type="Script" path="res://scripts/ore_data.gd" id="3_081xv"]
 [ext_resource type="Script" uid="uid://2pqt4ro7l4x" path="res://scripts/health_bar.gd" id="3_hbar"]
+[ext_resource type="Resource" uid="uid://fvbyahhty6c3" path="res://data/ores/iron.tres" id="4_12q1p"]
 [ext_resource type="Script" uid="uid://bvpitcxmyl6x3" path="res://scripts/cash_label.gd" id="4_cash"]
 [ext_resource type="Script" uid="uid://dl82d0q15fivb" path="res://scripts/altitude_label.gd" id="5_alt"]
+[ext_resource type="Resource" uid="uid://dvqq4u0ayo76f" path="res://data/ores/asteroid.tres" id="5_lhdcv"]
+[ext_resource type="Resource" uid="uid://di1kwscohduts" path="res://data/ores/bronze.tres" id="6_cgoaf"]
 [ext_resource type="Texture2D" uid="uid://cekhrevvyns63" path="res://assets/images/start.png" id="6_start"]
+[ext_resource type="Resource" uid="uid://c7ajtcyd68e0d" path="res://data/ores/diamond.tres" id="7_mwr4f"]
 [ext_resource type="Texture2D" uid="uid://dfhm48yddsg44" path="res://assets/images/restart.png" id="7_restart"]
+[ext_resource type="Resource" uid="uid://bf705sea3db52" path="res://data/ores/dinosaur_bones.tres" id="8_1qn5a"]
 [ext_resource type="PackedScene" uid="uid://cqjnmd5lir8ry" path="res://scenes/underground.tscn" id="8_underground"]
+[ext_resource type="Resource" uid="uid://cy0nwbbqr1vxa" path="res://data/ores/emerald.tres" id="9_leq5k"]
 [ext_resource type="Texture2D" uid="uid://b0g5xiefqttls" path="res://assets/images/sound.png" id="9_mlgqr"]
+[ext_resource type="Resource" uid="uid://7xsipfuqc72j" path="res://data/ores/gold.tres" id="10_qcc5i"]
 [ext_resource type="Texture2D" uid="uid://cxsbbe4a7kukg" path="res://assets/images/mute.png" id="11_gw3fx"]
+[ext_resource type="Resource" uid="uid://btymlj05p6xr8" path="res://data/ores/lapis_lazuli.tres" id="11_litwm"]
 [ext_resource type="Script" uid="uid://3axpgkya2sch" path="res://scripts/toggle_button.gd" id="11_wslke"]
+[ext_resource type="Resource" uid="uid://db1v6mt33ik0n" path="res://data/ores/mithril.tres" id="12_g8nl4"]
 [ext_resource type="PackedScene" uid="uid://btgrlfhm1alrv" path="res://scenes/fuel_station.tscn" id="13_gw3fx"]
+[ext_resource type="Resource" uid="uid://ubsit1ix5mi8" path="res://data/ores/oil.tres" id="13_vqsqp"]
+[ext_resource type="Resource" uid="uid://bf6r4tkfb2j7f" path="res://data/ores/platinum.tres" id="14_la2vj"]
+[ext_resource type="Resource" uid="uid://c33052wy23fwa" path="res://data/ores/relic.tres" id="15_5cjpp"]
+[ext_resource type="Resource" uid="uid://c3r2bw5b6npgq" path="res://data/ores/rock.tres" id="16_xcq86"]
+[ext_resource type="Resource" uid="uid://cvswedeowkxnr" path="res://data/ores/ruby.tres" id="17_7s432"]
+[ext_resource type="Resource" uid="uid://b8bs7d583hrsj" path="res://data/ores/sapphire.tres" id="18_baix8"]
+[ext_resource type="Resource" uid="uid://d2i1a2eiw8147" path="res://data/ores/scrap.tres" id="19_s2dh3"]
+[ext_resource type="Resource" uid="uid://tdj24ax6ot6" path="res://data/ores/silver.tres" id="20_8kgjo"]
+[ext_resource type="Resource" uid="uid://c5iehmpfdm4lh" path="res://data/ores/treasure.tres" id="21_fq3dv"]
+[ext_resource type="Resource" uid="uid://bw4wsyv3pq50w" path="res://data/ores/uranium.tres" id="22_ogd7i"]
+[ext_resource type="Resource" uid="uid://c0eoboy8kofjv" path="res://data/ores/vulcanic_rock.tres" id="23_tf62m"]
+[ext_resource type="PackedScene" uid="uid://bfla6kam2sktq" path="res://scenes/background.tscn" id="35_12q1p"]
+[ext_resource type="PackedScene" uid="uid://c3shopscene1x" path="res://scenes/shop.tscn" id="36_shop"]
+[ext_resource type="PackedScene" uid="uid://cinstrscene1x" path="res://scenes/instructions.tscn" id="37_instr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuel"]
 bg_color = Color(0.2, 0.5, 1, 1)
@@ -25,6 +49,7 @@ script = ExtResource("1_gldc4")
 
 [node name="Underground" parent="." unique_id=521807036 instance=ExtResource("8_underground")]
 position = Vector2(0, 90)
+ores = Array[ExtResource("3_081xv")]([ExtResource("4_12q1p"), ExtResource("5_lhdcv"), ExtResource("6_cgoaf"), ExtResource("7_mwr4f"), ExtResource("8_1qn5a"), ExtResource("9_leq5k"), ExtResource("10_qcc5i"), ExtResource("4_12q1p"), ExtResource("11_litwm"), ExtResource("12_g8nl4"), ExtResource("13_vqsqp"), ExtResource("14_la2vj"), ExtResource("15_5cjpp"), ExtResource("16_xcq86"), ExtResource("17_7s432"), ExtResource("18_baix8"), ExtResource("19_s2dh3"), ExtResource("20_8kgjo"), ExtResource("21_fq3dv"), ExtResource("22_ogd7i"), ExtResource("23_tf62m")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=703247256]
 
@@ -102,17 +127,89 @@ texture_normal = ExtResource("9_mlgqr")
 texture_pressed = ExtResource("11_gw3fx")
 script = ExtResource("11_wslke")
 
+[node name="RunSummaryPanel" type="Panel" parent="UILayer" unique_id=200000001]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -210.0
+offset_right = 175.0
+offset_bottom = 210.0
+
+[node name="TitleLabel" type="Label" parent="UILayer/RunSummaryPanel" unique_id=200000002]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 15.0
+offset_right = 320.0
+offset_bottom = 42.0
+text = "RUN OVER"
+horizontal_alignment = 1
+
+[node name="DepthLabel" type="Label" parent="UILayer/RunSummaryPanel" unique_id=200000003]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 70.0
+offset_right = 330.0
+offset_bottom = 95.0
+text = "Depth Reached:  0m"
+
+[node name="CashLabel" type="Label" parent="UILayer/RunSummaryPanel" unique_id=200000004]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 105.0
+offset_right = 330.0
+offset_bottom = 130.0
+text = "Cash Earned:    $0"
+
+[node name="OresLabel" type="Label" parent="UILayer/RunSummaryPanel" unique_id=200000005]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 140.0
+offset_right = 330.0
+offset_bottom = 165.0
+text = "Ores Mined:     0"
+
+[node name="BestOreLabel" type="Label" parent="UILayer/RunSummaryPanel" unique_id=200000006]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 175.0
+offset_right = 330.0
+offset_bottom = 200.0
+text = "Best Ore:       None"
+
+[node name="PlayAgainBtn" type="Button" parent="UILayer/RunSummaryPanel" unique_id=200000007]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 330.0
+offset_right = 265.0
+offset_bottom = 365.0
+text = "Play Again"
+
 [node name="FuelDrainTimer" type="Timer" parent="." unique_id=521807032]
 wait_time = 6.0
 
 [node name="player" parent="." unique_id=1130869114 instance=ExtResource("1_4xfga")]
+z_index = 1
 position = Vector2(160, 65)
 up_direction = Vector2(0, 1)
 
 [node name="FuelStation" parent="." unique_id=73789802 instance=ExtResource("13_gw3fx")]
 position = Vector2(-440, -257)
 
+[node name="Background" parent="." unique_id=1680999694 instance=ExtResource("35_12q1p")]
+z_index = -1
+position = Vector2(-275, -352)
+
+[node name="Shop" parent="." unique_id=200000008 instance=ExtResource("36_shop")]
+position = Vector2(750, 55)
+
+[node name="InstructionsLayer" parent="." unique_id=200000009 instance=ExtResource("37_instr")]
+
 [connection signal="pressed" from="UILayer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="UILayer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="UILayer/RunSummaryPanel/PlayAgainBtn" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="UILayer/ToggleButton" to="UILayer/ToggleButton" method="_on_toggle_button_pressed"]
 [connection signal="timeout" from="FuelDrainTimer" to="." method="_on_fuel_drain_timer_timeout"]

@@ -40,19 +40,21 @@ const ORE_TILE_MAP: Dictionary = {
 	"Treasure":       [2, Vector2i(2, 2)],
 }
 
+var chunkWidth = 25 ;
+var chunkHeight = 50;
 # Maps tile position → OreData so dig() can return the correct value.
 var ore_map: Dictionary = {}
 
 func _ready():
 	randomize()
 	_assign_missing_values()
-	generate_chunk(100, 100, 0, Vector2i(0, 0))
+	generate_chunk(chunkWidth, chunkHeight, 0, Vector2i(0, 0))
 
 # Regenerates the entire terrain with a new random seed (called on game restart).
 func reset():
 	randomize()
 	ore_map.clear()
-	generate_chunk(100, 100, 0, Vector2i(0, 0))
+	generate_chunk(chunkWidth, chunkHeight, 0, Vector2i(0, 0))
 
 # Any ore with value == 0 in its .tres file gets a random value scaled by rarity.
 # Rarer ores (lower spawn_chance) receive proportionally higher values.
