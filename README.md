@@ -18,9 +18,9 @@ When you die, a **Run Summary** breaks down exactly how far you made it and what
 
 | Key | Action |
 |-----|--------|
-| Arrow Left / Right | Move and drill horizontally |
-| Arrow Down | Drill downward |
-| Arrow Up | Fly upward (tunnels and open sky only) |
+| A / D  or  ← / → | Move and drill horizontally |
+| S  or  ↓ | Drill downward |
+| W  or  ↑ | Fly upward (tunnels and open sky only) |
 
 Horizontal and vertical inputs are mutually exclusive — no diagonal movement.
 

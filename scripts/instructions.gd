@@ -67,9 +67,9 @@ func _content() -> String:
 	return (
 		"[b][color=#FFD700]  CONTROLS[/color][/b]\n"
 		+ "[ul]\n"
-		+ "[li][color=#88CCFF]A / D[/color]  —  Move and drill left / right[/li]\n"
-		+ "[li][color=#88CCFF]S[/color]      —  Drill downward[/li]\n"
-		+ "[li][color=#88CCFF]W[/color]      —  Fly upward [color=#888888](tunnels and open sky only)[/color][/li]\n"
+		+ "[li][color=#88CCFF]A / D[/color]  or  [color=#88CCFF]← / →[/color]  —  Move and drill left / right[/li]\n"
+		+ "[li][color=#88CCFF]S[/color]  or  [color=#88CCFF]↓[/color]  —  Drill downward[/li]\n"
+		+ "[li][color=#88CCFF]W[/color]  or  [color=#88CCFF]↑[/color]  —  Fly upward [color=#888888](tunnels and open sky only)[/color][/li]\n"
 		+ "[/ul]\n"
 		+ "[color=#888888]Horizontal and vertical input are exclusive — no diagonal movement.\n"
 		+ "Speed slows automatically when solid rock is directly ahead.[/color]\n\n"
