@@ -197,21 +197,31 @@ func _on_animation_finished() -> void:
 # Plays the correct directional animation and toggles the matching sound effect.
 # Horizontal movement uses sfx_move; vertical (up) uses sfx_fly.
 func play_animation(prefix: String, dir: Vector2) -> void:
+	if prefix == "idle":
+		animated_sprite_2d.rotation = 0.0
+		animated_sprite_2d.flip_h = false
+		animated_sprite_2d.play("idle")
+		return
 	if dir.x != 0:
-		animated_sprite_2d.flip_h = dir.x > 0
-		animated_sprite_2d.play(prefix + "_left")
+		animated_sprite_2d.rotation = 0.0
+		animated_sprite_2d.flip_h = dir.x < 0
+		animated_sprite_2d.play(prefix + "_right")
 		if prefix == "move":
 			sfx_fly.stop()
 			if !sfx_move.playing:
 				sfx_move.play()
 	elif dir.y < 0:
+		animated_sprite_2d.rotation = 0.0
 		animated_sprite_2d.play(prefix + "_up")
 		if prefix == "move":
 			sfx_move.stop()
 			if !sfx_fly.playing:
 				sfx_fly.play()
 	elif dir.y > 0:
-		animated_sprite_2d.play(prefix + "_bottom")
+		# Rotate the sprite 90° clockwise so it faces downward.
+		animated_sprite_2d.rotation = PI / 2.0
+		animated_sprite_2d.flip_h = false
+		animated_sprite_2d.play(prefix + "_right")
 		if prefix == "move":
 			sfx_fly.stop()
 			if !sfx_move.playing:

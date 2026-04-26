@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqhrw3q1lmybe"
-path="res://.godot/imported/sprite-right.png-2f6b9af57af6127fe36b2223bcfe4456.ctex"
+uid="uid://bwencch8n8jmj"
+path="res://.godot/imported/fly-up-sprite.png-a33326aed3c4e30147da45b64afe44a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/sprite-right.png"
-dest_files=["res://.godot/imported/sprite-right.png-2f6b9af57af6127fe36b2223bcfe4456.ctex"]
+source_file="res://assets/images/fly-up-sprite.png"
+dest_files=["res://.godot/imported/fly-up-sprite.png-a33326aed3c4e30147da45b64afe44a1.ctex"]
 
 [params]
 
