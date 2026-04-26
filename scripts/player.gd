@@ -6,6 +6,7 @@ signal fuel_changed(new_fuel)
 @onready var sfx_move: AudioStreamPlayer = $sfx_move
 @onready var sfx_fly: AudioStreamPlayer = $sfx_fly
 @onready var sfx_mine: AudioStreamPlayer2D = $sfx_mine
+@onready var sfx_fuel_low: AudioStreamPlayer = $sfx_fuel_low
 
 @export var max_health := 100
 var health := max_health
@@ -17,6 +18,11 @@ signal cash_changed(new_cash)
 signal died
 const SPEED = 100.0
 const GRAVITY = 400.0
+const TERMINAL_VELOCITY = 600.0
+# Minimum fall speed (px/s) before damage kicks in.
+const FALL_DAMAGE_MIN_SPEED = 300.0
+# Damage per px/s of speed above the threshold.
+const FALL_DAMAGE_MULTIPLIER = 0.2
 var last_direction: Vector2 = Vector2.RIGHT
 var _start_position: Vector2
 var _active_direction: Vector2 = Vector2.ZERO
@@ -47,6 +53,7 @@ func reset() -> void:
 	_active_direction = Vector2.ZERO
 	emit_signal("health_changed", health)
 	emit_signal("fuel_changed", currentFuel)
+	sfx_fuel_low.stop()
 
 func _physics_process(delta: float) -> void:
 	process_movement(delta)
@@ -59,6 +66,8 @@ func refill_fuel(value: int):
 	if currentFuel >= maxFuel: return
 	currentFuel = min(currentFuel + value, maxFuel)
 	emit_signal("fuel_changed", currentFuel)
+	if currentFuel > 20:
+		sfx_fuel_low.stop()
 
 # Restores health up to the maximum.
 func refill_health(value: int):
@@ -135,13 +144,17 @@ func process_movement(delta: float) -> void:
 	if direction.x != 0:
 		direction.y = 0.0
 	velocity.x = direction.x * SPEED
+	var impact_speed := velocity.y
 	if direction.y < 0 and _can_fly_up():
 		velocity.y = -SPEED
 	elif _is_on_ground() and velocity.y >= 0:
+		if impact_speed > FALL_DAMAGE_MIN_SPEED:
+			take_damage(int((impact_speed - FALL_DAMAGE_MIN_SPEED) * FALL_DAMAGE_MULTIPLIER))
+			_flash_fall_damage()
 		velocity.y = 0.0
 		_snap_to_floor()
 	else:
-		velocity.y += GRAVITY * delta
+		velocity.y = minf(velocity.y + GRAVITY * delta, TERMINAL_VELOCITY)
 	if direction.y > 0:
 		velocity.y = SPEED
 	# Track facing direction for animation — also updated when falling.
@@ -153,6 +166,12 @@ func process_movement(delta: float) -> void:
 		last_direction = Vector2.DOWN
 	elif velocity.y > 10.0:
 		last_direction = Vector2.DOWN
+
+# Briefly tints the sprite red then fades back to normal to signal fall damage.
+func _flash_fall_damage() -> void:
+	animated_sprite_2d.modulate = Color(1.0, 0.2, 0.2, 1.0)
+	var tween := create_tween()
+	tween.tween_property(animated_sprite_2d, "modulate", Color.WHITE, 0.4)
 
 # Drives the sprite state machine: IDLE → TURNING → MOVING.
 # A turning animation plays once when direction changes before looping the move animation.
@@ -190,7 +209,7 @@ func play_animation(prefix: String, dir: Vector2) -> void:
 		if prefix == "move":
 			sfx_move.stop()
 			if !sfx_fly.playing:
-				sfx_fly.play(5)
+				sfx_fly.play()
 	elif dir.y > 0:
 		animated_sprite_2d.play(prefix + "_bottom")
 		if prefix == "move":
@@ -206,10 +225,12 @@ func spend_cash(amount: int):
 	cash = max(cash - amount, 0)
 	emit_signal("cash_changed", cash)
 
-# Drains fuel and triggers death when it hits zero.
+# Drains fuel, plays low-fuel warning when at or below 20, and triggers death at zero.
 func consume_fuel(amount: int):
 	currentFuel = max(currentFuel - amount, 0)
 	emit_signal("fuel_changed", currentFuel)
+	if currentFuel <= 20 and not sfx_fuel_low.playing:
+		sfx_fuel_low.play()
 	if currentFuel <= 0:
 		died.emit()
 

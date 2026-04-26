@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://cekhrevvyns63" path="res://assets/images/start.png" id="6_start"]
 [ext_resource type="Texture2D" uid="uid://dfhm48yddsg44" path="res://assets/images/restart.png" id="7_restart"]
 [ext_resource type="PackedScene" uid="uid://cqjnmd5lir8ry" path="res://scenes/underground.tscn" id="8_underground"]
+[ext_resource type="Texture2D" uid="uid://b0g5xiefqttls" path="res://assets/images/sound.png" id="9_mlgqr"]
+[ext_resource type="Texture2D" uid="uid://cxsbbe4a7kukg" path="res://assets/images/mute.png" id="11_gw3fx"]
+[ext_resource type="Script" uid="uid://3axpgkya2sch" path="res://scenes/toggle_button.gd" id="11_wslke"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuel"]
 bg_color = Color(0.2, 0.5, 1, 1)
@@ -89,15 +92,23 @@ texture_normal = ExtResource("7_restart")
 ignore_texture_size = true
 stretch_mode = 5
 
+[node name="ToggleButton" type="TextureButton" parent="UILayer" unique_id=591476114]
+offset_left = 1042.0
+offset_right = 1075.0
+offset_bottom = 32.0
+toggle_mode = true
+texture_normal = ExtResource("9_mlgqr")
+texture_pressed = ExtResource("11_gw3fx")
+script = ExtResource("11_wslke")
+
 [node name="FuelDrainTimer" type="Timer" parent="." unique_id=521807032]
 wait_time = 6.0
 
 [node name="player" parent="." unique_id=1130869114 instance=ExtResource("1_4xfga")]
 position = Vector2(160, 65)
 up_direction = Vector2(0, 1)
-maxFuel = 100
-max_health = 100
 
 [connection signal="pressed" from="UILayer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="UILayer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="UILayer/ToggleButton" to="UILayer/ToggleButton" method="_on_toggle_button_pressed"]
 [connection signal="timeout" from="FuelDrainTimer" to="." method="_on_fuel_drain_timer_timeout"]

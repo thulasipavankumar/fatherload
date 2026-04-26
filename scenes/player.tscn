@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dewewpisepmp3" path="res://scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bolkcd7ghbr47" path="res://assets/Pod Movement.png" id="2_i3pqv"]
 [ext_resource type="AudioStream" uid="uid://b1ipxs4rbv11y" path="res://assets/audio/miner-move.mp3" id="4_dqkch"]
+[ext_resource type="AudioStream" uid="uid://c4f8p5b1qbf5m" path="res://assets/audio/low-fuel-indication.mp3" id="5_fjrip"]
 [ext_resource type="AudioStream" uid="uid://bfxxv5npktxub" path="res://assets/audio/drone-fly.mp3" id="5_qlg0r"]
 [ext_resource type="AudioStream" uid="uid://djlmfxfeewyxy" path="res://assets/audio/mining.mp3" id="6_tuyoq"]
 
@@ -389,9 +390,13 @@ shape = SubResource("CircleShape2D_onrkg")
 stream = ExtResource("4_dqkch")
 volume_db = -1.954
 
+[node name="sfx_fuel_low" type="AudioStreamPlayer" parent="." unique_id=1942933849]
+stream = ExtResource("5_fjrip")
+
 [node name="sfx_fly" type="AudioStreamPlayer" parent="." unique_id=1110311842]
 stream = ExtResource("5_qlg0r")
-volume_db = -1.954
+volume_db = -6.427
+playback_type = 1
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1611243886]
 process_callback = 0
