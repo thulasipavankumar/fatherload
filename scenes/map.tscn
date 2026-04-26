@@ -34,6 +34,7 @@
 [ext_resource type="Resource" uid="uid://c5iehmpfdm4lh" path="res://data/ores/treasure.tres" id="21_fq3dv"]
 [ext_resource type="Resource" uid="uid://bw4wsyv3pq50w" path="res://data/ores/uranium.tres" id="22_ogd7i"]
 [ext_resource type="Resource" uid="uid://c0eoboy8kofjv" path="res://data/ores/vulcanic_rock.tres" id="23_tf62m"]
+[ext_resource type="PackedScene" uid="uid://bfla6kam2sktq" path="res://scenes/background.tscn" id="35_12q1p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuel"]
 bg_color = Color(0.2, 0.5, 1, 1)
@@ -128,11 +129,16 @@ script = ExtResource("11_wslke")
 wait_time = 6.0
 
 [node name="player" parent="." unique_id=1130869114 instance=ExtResource("1_4xfga")]
+z_index = 1
 position = Vector2(160, 65)
 up_direction = Vector2(0, 1)
 
 [node name="FuelStation" parent="." unique_id=73789802 instance=ExtResource("13_gw3fx")]
 position = Vector2(-440, -257)
+
+[node name="Background" parent="." unique_id=1680999694 instance=ExtResource("35_12q1p")]
+z_index = -1
+position = Vector2(-277, -356)
 
 [connection signal="pressed" from="UILayer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="UILayer/RestartButton" to="." method="_on_restart_button_pressed"]
