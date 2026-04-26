@@ -138,7 +138,7 @@ position = Vector2(-440, -257)
 
 [node name="Background" parent="." unique_id=1680999694 instance=ExtResource("35_12q1p")]
 z_index = -1
-position = Vector2(-277, -356)
+position = Vector2(-275, -352)
 
 [connection signal="pressed" from="UILayer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="UILayer/RestartButton" to="." method="_on_restart_button_pressed"]

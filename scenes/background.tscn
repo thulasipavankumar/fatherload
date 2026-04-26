@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://hes6gh36e1xe" path="res://scripts/background.gd" id="4_bgscr"]
 
 [node name="Background" type="Node2D" unique_id=1680999694]
+position = Vector2(3, 33)
 script = ExtResource("4_bgscr")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1914586324]

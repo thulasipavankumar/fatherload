@@ -7,7 +7,7 @@ func _ready() -> void:
 	$player.underground = $Underground
 	$player.set_physics_process(false)
 	$UILayer/RestartButton.hide()
-	
+	_apply_camera_limits()
 
 	var stream: AudioStreamMP3 = load("res://assets/audio/background.mp3")
 	stream.loop = true
@@ -15,6 +15,16 @@ func _ready() -> void:
 	_bgm.stream = stream
 	_bgm.volume_db = -5.0
 	add_child(_bgm)
+
+func _apply_camera_limits() -> void:
+	var ground_layer = $Underground.ground_layer
+	var tile_size: Vector2i = ground_layer.tile_set.tile_size
+	var used: Rect2i = ground_layer.get_used_rect()
+	var map_left := int($Underground.position.x + used.position.x * tile_size.x)
+	var map_right := int($Underground.position.x + used.end.x * tile_size.x)
+	var camera: Camera2D = $player/Camera2D
+	camera.limit_left = map_left
+	camera.limit_right = map_right
 
 func _process(delta: float) -> void:
 	pass

@@ -16,7 +16,8 @@ var cash: int = 0
 signal cash_changed(new_cash)
 
 signal died
-const SPEED = 100.0
+const SPEED = 200.0
+const MINING_SPEED = 100.0
 const GRAVITY = 400.0
 const TERMINAL_VELOCITY = 600.0
 # Minimum fall speed (px/s) before damage kicks in.
@@ -62,6 +63,16 @@ func _physics_process(delta: float) -> void:
 	process_animation()
 	try_dig()
 	move_and_slide()
+	_clamp_to_map()
+
+func _clamp_to_map() -> void:
+	if underground == null:
+		return
+	var tile_size: Vector2i = underground.ground_layer.tile_set.tile_size
+	var used: Rect2i = underground.ground_layer.get_used_rect()
+	var map_left := underground.position.x + used.position.x * tile_size.x
+	var map_right := underground.position.x + used.end.x * tile_size.x
+	position.x = clampf(position.x, map_left, map_right)
 
 # Adds fuel up to the tank capacity.
 func refill_fuel(value: int):
@@ -140,15 +151,35 @@ func _snap_to_floor() -> void:
 #   - Pressing up flies the player upward only when the tile above is passable.
 #   - Gravity accumulates when airborne; landing snaps the player to the tile surface.
 #   - Pressing down sets a fixed downward speed for active floor-digging.
+func _is_mining(direction: Vector2) -> bool:
+	if underground == null:
+		return false
+	var dig_dir := Vector2.ZERO
+	if abs(direction.x) > abs(direction.y):
+		dig_dir = Vector2(sign(direction.x), 0)
+	elif direction.y > 0:
+		dig_dir = Vector2.DOWN
+	if dig_dir == Vector2.ZERO:
+		return false
+	# Check across two tile-widths ahead so speed stays low between tiles.
+	for dist: float in [20.0, 40.0, 60.0, 80.0]:
+		var dig_point := position + dig_dir * dist
+		var local_pos := dig_point - underground.position
+		var tile_pos: Vector2i = underground.ground_layer.local_to_map(local_pos)
+		if underground.is_diggable(tile_pos):
+			return true
+	return false
+
 func process_movement(delta: float) -> void:
 	var direction := Input.get_vector("left", "right", "up", "down")
 	# Lock to one axis — horizontal takes priority over vertical input.
 	if direction.x != 0:
 		direction.y = 0.0
-	velocity.x = direction.x * SPEED
+	var current_speed := MINING_SPEED if _is_mining(direction) else SPEED
+	velocity.x = direction.x * current_speed
 	var impact_speed := velocity.y
 	if direction.y < 0 and _can_fly_up():
-		velocity.y = -SPEED
+		velocity.y = -current_speed
 	elif _is_on_ground() and velocity.y >= 0:
 		if impact_speed > FALL_DAMAGE_MIN_SPEED:
 			take_damage(int((impact_speed - FALL_DAMAGE_MIN_SPEED) * FALL_DAMAGE_MULTIPLIER))
@@ -158,7 +189,7 @@ func process_movement(delta: float) -> void:
 	else:
 		velocity.y = minf(velocity.y + GRAVITY * delta, TERMINAL_VELOCITY)
 	if direction.y > 0:
-		velocity.y = SPEED
+		velocity.y = current_speed
 	# Track facing direction for animation — also updated when falling.
 	if direction.x != 0:
 		last_direction = Vector2(sign(direction.x), 0)
