@@ -1,7 +1,13 @@
-[gd_resource type="Resource" script_class="Ore" format=3 uid="uid://c0eoboy8kofjv"]
+[gd_resource type="Resource" script_class="OreData" format=3 uid="uid://c0eoboy8kofjv"]
 
-[ext_resource type="Script" uid="uid://csl8nfrg65j65" path="res://scripts/ore_data.gd" id="1_2q5dr"]
+[ext_resource type="Script" path="res://scripts/ore_data.gd" id="1_2q5dr"]
 
 [resource]
 script = ExtResource("1_2q5dr")
+name = "Vulcanic Rock"
+value = 8
+weight = 3.0
+spawn_chance = 45.0
+min_optimal_depth = 50.0
+max_optimal_depth = 10000.0
 metadata/_custom_type_script = "uid://csl8nfrg65j65"
