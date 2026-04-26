@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ctj1auybjvuym" path="res://assets/images/new-fuel.png" id="2_bt0w5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bt0w5"]
-size = Vector2(100, 46)
+size = Vector2(170, 57)
 
 [node name="FuelStation" type="Node2D" unique_id=73789802]
 script = ExtResource("1_84q31")
@@ -19,7 +19,7 @@ texture = ExtResource("2_bt0w5")
 z_index = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1385431380]
-position = Vector2(937, 291)
+position = Vector2(936, 296.5)
 shape = SubResource("RectangleShape2D_bt0w5")
 
 [node name="FuelUI" type="CanvasLayer" parent="." unique_id=1106335856]
@@ -32,18 +32,18 @@ offset_bottom = 308.0
 
 [node name="Label" type="Label" parent="FuelUI/Panel" unique_id=451635062]
 layout_mode = 0
-offset_left = 78.0
-offset_top = 24.0
-offset_right = 149.0
-offset_bottom = 47.0
+offset_left = 60.0
+offset_top = 22.0
+offset_right = 154.0
+offset_bottom = 71.0
 text = "Buy fuel?
 10$ = 1 Litre"
 
 [node name="Button" type="Button" parent="FuelUI/Panel" unique_id=445875292]
 layout_mode = 0
-offset_left = 74.0
+offset_left = 63.0
 offset_top = 80.0
-offset_right = 154.0
+offset_right = 150.0
 offset_bottom = 111.0
 text = "Purchase"
 

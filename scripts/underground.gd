@@ -14,6 +14,32 @@ const ore_spawn_chance_cutoff = 0.0001;
 const tunnel_tile_source_id = 0
 const tunnel_tile_coords = Vector2i(0, 6)
 
+# Maps ore name → [source_id, atlas_coords] for rendering.
+# Each ore gets a distinct tile from the StewV mineral sheets.
+const ORE_TILE_MAP: Dictionary = {
+	"Iron":           [1, Vector2i(0, 3)],
+	"Rock":           [1, Vector2i(1, 3)],
+	"Coal":           [1, Vector2i(1, 4)],
+	"Bronze":         [1, Vector2i(2, 4)],
+	"Scrap":          [1, Vector2i(0, 4)],
+	"Silver":         [1, Vector2i(0, 5)],
+	"Lapis Lazuli":   [1, Vector2i(3, 2)],
+	"Oil":            [1, Vector2i(2, 2)],
+	"Vulcanic Rock":  [1, Vector2i(1, 2)],
+	"Gold":           [1, Vector2i(2, 0)],
+	"Platinum":       [1, Vector2i(5, 2)],
+	"Emerald":        [1, Vector2i(0, 2)],
+	"Sapphire":       [1, Vector2i(1, 1)],
+	"Ruby":           [1, Vector2i(0, 1)],
+	"Diamond":        [1, Vector2i(6, 3)],
+	"Mithril":        [1, Vector2i(5, 5)],
+	"Uranium":        [1, Vector2i(6, 5)],
+	"Dinosaur Bones": [1, Vector2i(1, 5)],
+	"Asteroid":       [1, Vector2i(4, 1)],
+	"Relic":          [1, Vector2i(6, 0)],
+	"Treasure":       [2, Vector2i(2, 2)],
+}
+
 # Maps tile position → OreData so dig() can return the correct value.
 var ore_map: Dictionary = {}
 
@@ -104,7 +130,8 @@ func _render_chunk(chunk: Array, chunk_origin: Vector2i):
 				GroundTypes.GroundType.ORE:
 					# Dirt background first, then ore overlay.
 					ground_layer.set_cell(tile_pos, 0, Vector2i(0, 0))
-					ore_layer.set_cell(tile_pos, 1, Vector2i(0, 3))
+					var tile_info = ORE_TILE_MAP.get(cell.ore.name, [1, Vector2i(0, 3)])
+					ore_layer.set_cell(tile_pos, tile_info[0], tile_info[1])
 					ore_map[tile_pos] = cell.ore
 
 # Builds the raw chunk array by calling _create_ground_cell for every position.

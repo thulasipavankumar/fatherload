@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://scripts/ore_data.gd" id="2_2be3n"]
 [ext_resource type="Texture2D" uid="uid://dl0kd16gsxsg8" path="res://assets/images/underground/Mineral & Ore Asset Collection - StewV/sprite_sheets/transparent_background/StewV_Minerals_Sheet_01T.png" id="2_osycu"]
 [ext_resource type="Resource" uid="uid://fvbyahhty6c3" path="res://data/ores/iron.tres" id="3_hxwvr"]
+[ext_resource type="Resource" uid="uid://cecpbiw2ori01" path="res://data/ores/coal.tres" id="23_coal"]
 [ext_resource type="Texture2D" uid="uid://chqjc2ixqg0u6" path="res://assets/images/underground/Mineral & Ore Asset Collection - StewV/sprite_sheets/transparent_background/StewV_Minerals_Sheet_02T.png" id="3_iubgi"]
 [ext_resource type="Texture2D" uid="uid://bevchnglpefy0" path="res://assets/images/underground/Mineral & Ore Asset Collection - StewV/sprite_sheets/transparent_background/StewV_Minerals_Sheet_03T.png" id="4_6vnne"]
 [ext_resource type="Resource" uid="uid://dvqq4u0ayo76f" path="res://data/ores/asteroid.tres" id="4_ifknv"]
@@ -114,7 +115,7 @@ sources/0 = SubResource("TileSetAtlasSource_2be3n")
 
 [node name="Underground" type="Node2D" unique_id=55342288]
 script = ExtResource("1_osycu")
-ores = Array[ExtResource("2_2be3n")]([ExtResource("3_hxwvr"), ExtResource("4_ifknv"), ExtResource("5_ofvo7"), ExtResource("6_4cgia"), ExtResource("7_maujv"), ExtResource("8_4mj28"), ExtResource("9_u5fps"), ExtResource("3_hxwvr"), ExtResource("10_aijtf"), ExtResource("11_xaln6"), ExtResource("12_edeay"), ExtResource("13_7fg5t"), ExtResource("14_u3x31"), ExtResource("15_ucytc"), ExtResource("16_6c88v"), ExtResource("17_gybvo"), ExtResource("18_kmhou"), ExtResource("19_dlbyx"), ExtResource("20_7qqxa"), ExtResource("21_t5xy4"), ExtResource("22_jhyyg")])
+ores = Array[ExtResource("2_2be3n")]([ExtResource("3_hxwvr"), ExtResource("4_ifknv"), ExtResource("5_ofvo7"), ExtResource("6_4cgia"), ExtResource("7_maujv"), ExtResource("8_4mj28"), ExtResource("9_u5fps"), ExtResource("23_coal"), ExtResource("10_aijtf"), ExtResource("11_xaln6"), ExtResource("12_edeay"), ExtResource("13_7fg5t"), ExtResource("14_u3x31"), ExtResource("15_ucytc"), ExtResource("16_6c88v"), ExtResource("17_gybvo"), ExtResource("18_kmhou"), ExtResource("19_dlbyx"), ExtResource("20_7qqxa"), ExtResource("21_t5xy4"), ExtResource("22_jhyyg")])
 
 [node name="Ores" type="TileMapLayer" parent="." unique_id=2125805592]
 z_index = 1

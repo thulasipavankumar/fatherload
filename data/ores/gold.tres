@@ -1,11 +1,13 @@
 [gd_resource type="Resource" script_class="OreData" format=3 uid="uid://7xsipfuqc72j"]
 
-[ext_resource type="Script" uid="uid://csl8nfrg65j65" path="res://scripts/ore_data.gd" id="1_oyvqm"]
+[ext_resource type="Script" path="res://scripts/ore_data.gd" id="1_oyvqm"]
 
 [resource]
 script = ExtResource("1_oyvqm")
 name = "Gold"
 type = 3
+value = 50
+weight = 3.0
 spawn_chance = 30.0
 min_optimal_depth = 80.0
 max_optimal_depth = 10000.0
