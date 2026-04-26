@@ -7,6 +7,7 @@ func _ready() -> void:
 	$player.underground = $Underground
 	$player.set_physics_process(false)
 	$UILayer/RestartButton.hide()
+	
 
 	var stream: AudioStreamMP3 = load("res://assets/audio/background.mp3")
 	stream.loop = true

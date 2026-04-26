@@ -47,12 +47,14 @@ func _ready() -> void:
 func reset() -> void:
 	health = max_health
 	currentFuel = maxFuel
+	cash = 0
 	position = _start_position
 	velocity = Vector2.ZERO
 	anim_state = AnimState.IDLE
 	_active_direction = Vector2.ZERO
 	emit_signal("health_changed", health)
 	emit_signal("fuel_changed", currentFuel)
+	emit_signal("cash_changed", cash)
 	sfx_fuel_low.stop()
 
 func _physics_process(delta: float) -> void:
