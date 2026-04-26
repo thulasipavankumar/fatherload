@@ -35,6 +35,7 @@
 [ext_resource type="Resource" uid="uid://bw4wsyv3pq50w" path="res://data/ores/uranium.tres" id="22_ogd7i"]
 [ext_resource type="Resource" uid="uid://c0eoboy8kofjv" path="res://data/ores/vulcanic_rock.tres" id="23_tf62m"]
 [ext_resource type="PackedScene" uid="uid://bfla6kam2sktq" path="res://scenes/background.tscn" id="35_12q1p"]
+[ext_resource type="PackedScene" uid="uid://c3shopscene1x" path="res://scenes/shop.tscn" id="36_shop"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuel"]
 bg_color = Color(0.2, 0.5, 1, 1)
@@ -125,6 +126,67 @@ texture_normal = ExtResource("9_mlgqr")
 texture_pressed = ExtResource("11_gw3fx")
 script = ExtResource("11_wslke")
 
+[node name="RunSummaryPanel" type="Panel" parent="UILayer" unique_id=200000001]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -210.0
+offset_right = 175.0
+offset_bottom = 210.0
+
+[node name="TitleLabel" type="Label" parent="UILayer/RunSummaryPanel" unique_id=200000002]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 15.0
+offset_right = 320.0
+offset_bottom = 42.0
+text = "RUN OVER"
+horizontal_alignment = 1
+
+[node name="DepthLabel" type="Label" parent="UILayer/RunSummaryPanel" unique_id=200000003]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 70.0
+offset_right = 330.0
+offset_bottom = 95.0
+text = "Depth Reached:  0m"
+
+[node name="CashLabel" type="Label" parent="UILayer/RunSummaryPanel" unique_id=200000004]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 105.0
+offset_right = 330.0
+offset_bottom = 130.0
+text = "Cash Earned:    $0"
+
+[node name="OresLabel" type="Label" parent="UILayer/RunSummaryPanel" unique_id=200000005]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 140.0
+offset_right = 330.0
+offset_bottom = 165.0
+text = "Ores Mined:     0"
+
+[node name="BestOreLabel" type="Label" parent="UILayer/RunSummaryPanel" unique_id=200000006]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 175.0
+offset_right = 330.0
+offset_bottom = 200.0
+text = "Best Ore:       None"
+
+[node name="PlayAgainBtn" type="Button" parent="UILayer/RunSummaryPanel" unique_id=200000007]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 330.0
+offset_right = 265.0
+offset_bottom = 365.0
+text = "Play Again"
+
 [node name="FuelDrainTimer" type="Timer" parent="." unique_id=521807032]
 wait_time = 6.0
 
@@ -140,7 +202,11 @@ position = Vector2(-440, -257)
 z_index = -1
 position = Vector2(-275, -352)
 
+[node name="Shop" parent="." unique_id=200000008 instance=ExtResource("36_shop")]
+position = Vector2(750, 55)
+
 [connection signal="pressed" from="UILayer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="UILayer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="UILayer/RunSummaryPanel/PlayAgainBtn" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="UILayer/ToggleButton" to="UILayer/ToggleButton" method="_on_toggle_button_pressed"]
 [connection signal="timeout" from="FuelDrainTimer" to="." method="_on_fuel_drain_timer_timeout"]

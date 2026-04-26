@@ -7,6 +7,7 @@ func _ready() -> void:
 	$player.underground = $Underground
 	$player.set_physics_process(false)
 	$UILayer/RestartButton.hide()
+	$UILayer/RunSummaryPanel.hide()
 	_apply_camera_limits()
 
 	var stream: AudioStreamMP3 = load("res://assets/audio/background.mp3")
@@ -38,7 +39,8 @@ func _on_start_button_pressed() -> void:
 func _on_restart_button_pressed() -> void:
 	$Underground.reset()
 	$player.reset()
-	$UILayer/RestartButton.hide()
+	$Shop.reset()
+	$UILayer/RunSummaryPanel.hide()
 	$player.set_physics_process(true)
 	$FuelDrainTimer.start()
 	_bgm.play()
@@ -46,8 +48,22 @@ func _on_restart_button_pressed() -> void:
 func _on_player_died() -> void:
 	$player.set_physics_process(false)
 	$FuelDrainTimer.stop()
-	$UILayer/RestartButton.show()
 	_bgm.stop()
+	_show_run_summary()
+
+func _show_run_summary() -> void:
+	var p = $player
+	var panel = $UILayer/RunSummaryPanel
+	panel.get_node("DepthLabel").text = "Depth Reached:  %dm" % int(p.max_depth_reached)
+	panel.get_node("CashLabel").text  = "Cash Earned:    $%d" % p.total_cash_earned
+	panel.get_node("OresLabel").text  = "Ores Mined:     %d" % p.ores_mined
+	var best_str: String
+	if p.ores_mined > 0:
+		best_str = "%s  ($%d)" % [p.best_ore_name, int(p.best_ore_value)]
+	else:
+		best_str = "None"
+	panel.get_node("BestOreLabel").text = "Best Ore:       " + best_str
+	panel.show()
 
 func _on_fuel_drain_timer_timeout() -> void:
 	consume_fuel(10)
